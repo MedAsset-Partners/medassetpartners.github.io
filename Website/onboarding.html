@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAsset Partners - Onboarding</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333333;
+            overflow-x: hidden;
+        }
+
+        /* Navigation Banner */
+        .navbar {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(46, 134, 171, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            color: white;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .logo-cross {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .logo-cross::before,
+        .logo-cross::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 1px;
+        }
+        
+        .logo-cross::before {
+            width: 3px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .logo-cross::after {
+            width: 20px;
+            height: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-main {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .logo-sub {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #F18F01;
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: #F18F01;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, #2E86AB 0%, #A23B72 50%, #F18F01 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+            50% { transform: translateX(-50%) translateY(-50%) rotate(180deg); }
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        /* Process Section */
+        .process-section {
+            padding: 5rem 2rem;
+            background: #f8f9fa;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #333333;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #2E86AB, #F18F01);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .process-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            text-align: center;
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid #eeeeee;
+            overflow: hidden;
+        }
+
+        .process-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #2E86AB, #A23B72, #F18F01);
+        }
+
+        .process-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+        }
+
+        .step-1 { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+        .step-2 { background: linear-gradient(135deg, #2E86AB, #3498db); }
+        .step-3 { background: linear-gradient(135deg, #8E44AD, #9B59B6); }
+        .step-4 { background: linear-gradient(135deg, #F39C12, #F1C40F); }
+        .step-5 { background: linear-gradient(135deg, #E74C3C , #C0392B); }
+
+        .process-card h3 {
+            font-size: 1.5rem;
+            color: #333333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .process-card p {
+            color: #666666;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 5rem 2rem;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #eeeeee;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .benefit-card:nth-child(1) { animation-delay: 0.1s; }
+        .benefit-card:nth-child(2) { animation-delay: 0.2s; }
+        .benefit-card:nth-child(3) { animation-delay: 0.3s; }
+        .benefit-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+
+        .icon-savings { background: linear-gradient(135deg, #27AE60, #2ECC71); }
+        .icon-expert { background: linear-gradient(135deg, #8E44AD, #9B59B6); }
+        .icon-time { background: linear-gradient(135deg, #F39C12, #F1C40F); }
+        .icon-compliance { background: linear-gradient(135deg, #E74C3C, #C0392B); }
+
+        /* Stats Section */
+        .stats-section {
+            padding: 3rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .stats-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .stats-title {
+            font-size: 1.8rem;
+            color: #2E86AB;
+            margin-bottom: 2rem;
+            font-weight: 600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2E86AB;
+            display: block;
+            margin-bottom: 0.5rem;
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 500;
+        }
+        .cta-section {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2E86AB 0%, #A23B72 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Contact Info Footer */
+        .contact-footer {
+            background: #f8f9fa;
+            padding: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #eeeeee;
+        }
+
+        .contact-footer strong {
+            color: #2E86AB;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 1rem 2rem;
+            background: white;
+            color: #2E86AB;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            padding: 1rem 2rem;
+            background: transparent;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-primary:hover, .btn-secondary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: #2E86AB;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .process-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Scroll Animation */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Banner -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <div class="logo-icon">
+                    <div class="logo-cross"></div>
+                </div>
+                <div class="logo-text">
+                    <div class="logo-main">MedAsset Partners</div>
+                    <div class="logo-sub">Medical Equipment Excellence</div>
+                </div>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="service.html">Services</a></li>
+                <li><a href="#pricing.html">Process</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li> 
+            </ul> 
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Stop Overpaying for Equipment Maintenance</h1>
+            <p>Professional third-party maintenance saves medical facilities thousands while ensuring peak performance and full compliance with all regulatory requirements.</p>
+            <a href="pricing.html" class="cta-button">Start Your Journey</a>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="process">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Your Onboarding Journey</h2>
+            <div class="process-grid">
+                <div class="process-card scroll-reveal">
+                    <div class="step-number step-1">1</div>
+                    <h3>Select Service Subscription</h3>
+                    <p>Select the plan that best fits your practice's needs. See how you can save or get a custom quote by calling or texting (480)-840-7352.</p>
+                </div>
+                <div class="process-card scroll-reveal">
+                    <div class="step-number step-2">2</div>
+                    <h3>On-Site Equipment Inventory</h3>
+                    <p>Our certified technicians conduct a comprehensive on-site assessment of all your biomedical equipment, documenting current conditions, maintenance history, and operational procedures to create a complete baseline.</p>
+                </div>
+                
+                <div class="process-card scroll-reveal">
+                    <div class="step-number step-3">3</div>
+                    <h3>Customer Dashboard Access</h3>
+                    <p>Gain instant access to your personalized dashboard where all equipment documentation, maintenance records, compliance certificates, and real-time status updates are consolidated in one secure, easy-to-navigate platform.</p>
+                </div>
+                
+                <div class="process-card scroll-reveal">
+                    <div class="step-number step-4">4</div>
+                    <h3>Detailed Recommendation Report</h3>
+                    <p>Receive a comprehensive analysis with prioritized maintenance recommendations, cost-benefit projections, compliance requirements, and a customized maintenance schedule tailored to your facility's specific needs.</p>
+                </div>
+                
+                <div class="process-card scroll-reveal">
+                    <div class="step-number step-5">5</div>
+                    <h3>Sit Back and Relax</h3>
+                    <p>Once approved, our expert team takes complete responsibility for your equipment maintenance. Enjoy automated scheduling, proactive care, emergency support, and detailed reporting while you focus on patient care.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section -->
+    <section class="benefits-section">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Why Choose Our Services</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon icon-savings">💰</div>
+                    <h3>Save 40-60%</h3>
+                    <p>Cut maintenance costs dramatically compared to manufacturer contracts while maintaining the highest service standards.</p>
+                </div>
+                
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon icon-expert">🔧</div>
+                    <h3>Expert Technicians</h3>
+                    <p>Certified professionals with years of medical equipment experience and specialized training.</p>
+                </div>
+                
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon icon-time">⚡</div>
+                    <h3>Faster Response</h3>
+                    <p>Same-day service calls and emergency support when you need it most, minimizing downtime.</p>
+                </div>
+                
+                <div class="benefit-card scroll-reveal">
+                    <div class="benefit-icon icon-compliance">✅</div>
+                    <h3>Full Compliance</h3>
+                    <p>Meet all regulatory requirements with detailed documentation and comprehensive reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-container scroll-reveal">
+                <h3 class="stats-title">Why Medical Facilities Choose Third-Party Maintenance</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number">30%-50%</span>
+                        <div class="stat-label">Average Savings</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <div class="stat-label">Support Available</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">95%</span>
+                        <div class="stat-label">Uptime Guaranteed</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Cut Your Maintenance Costs?</h2>
+            <p>Get a free consultation and cost comparison for your equipment maintenance needs.</p>
+            <div class="cta-buttons">
+                <a href="pricing.html" class="btn-primary">View Estimated Pricing</a>
+                <a href="service.html" class="btn-secondary">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Footer -->
+    <footer class="contact-footer">
+        <div class="container">
+            <strong>Call:</strong> (480) 840-7352  | <strong>Email:</strong> info@medassetpartners.com<br>
+            <strong>Web:</strong> www.medassetpartners.com
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add floating animation to process cards
+        document.querySelectorAll('.process-card').forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.2}s`;
+            card.classList.add('fade-in');
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+
+        // Dynamic navbar background on scroll
+        window.addEventListener('scroll', () => {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'linear-gradient(135deg, rgba(46, 134, 171, 0.95) 0%, rgba(52, 152, 219, 0.95) 100%)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, #2E86AB 0%, #3498db 100%)';
+            }
+        });
+    </script>
+</body>
+</html>
