@@ -25,32 +25,96 @@
         }
         
         /* Header */
-        header {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            padding: 1rem 0;
+        .header {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
         }
         
         .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 1rem 0;
         }
+        
+        .logo-mini {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mini-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mini-cross {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .mini-cross::before,
+        .mini-cross::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 1px;
+        }
+        
+        .mini-cross::before {
+            width: 3px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .mini-cross::after {
+            width: 20px;
+            height: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
         
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             font-weight: bold;
             color: #2E86AB;
         }
         
         .logo-icon {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             background: #2E86AB;
-            border-radius: 6px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -303,19 +367,22 @@
     <header>
         <div class="container">
             <div class="header-content">
-                <div class="logo">
-                    <div class="logo-icon">M</div>
-                    <div>
-                        <div>MedAsset Partners</div>
-                        <div style="font-size: 0.7rem; color: #666;">Medical Equipment Excellence</div>
+                <div class="logo-mini">
+                    <div class="mini-icon">
+                    <div class="mini-cross"></div>
                     </div>
+                <div>
+                    <div style="font-size: 18px; font-weight: 700; margin-bottom: 2px;">MedAsset Partners</div>
+                    <div style="font-size: 12px; opacity: 0.8;">Medical Equipment Excellence</div>
                 </div>
+            </div>
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="pricing.html">Services</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
+                        
                     </ul>
                 </nav>
             </div>
@@ -512,7 +579,155 @@
                     </div>
                 </div>
             </div>
-
+          <!-- Technology Support -->
+            <div class="service-category">
+                <div class="category-header">
+                    <h2>Technology Support & Implementation</h2>
+                    <p>Complete technological solutions from automation to system integration and digital transformation</p>
+                </div>
+                <div class="category-content">
+                    <div class="service-grid">
+                        <div class="service-item">
+                            <h3>Equipment Automation</h3>
+                            <p>Modernize your practice with automated workflows and smart equipment integration.</p>
+                            <div class="service-features">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Workflow automation</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Equipment connectivity</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Smart monitoring systems</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Data analytics integration</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <h3>System Implementation</h3>
+                            <p>Seamless installation and setup of new equipment and technology systems.</p>
+                            <div class="service-features">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Equipment installation</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>System configuration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Network integration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Staff training programs</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <h3>Technology Transition</h3>
+                            <p>Smooth migration from legacy systems to modern technology platforms.</p>
+                            <div class="service-features">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Migration planning</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Data transfer services</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Parallel system testing</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Go-live support</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <h3>Digital Infrastructure</h3>
+                            <p>Build robust technology foundations for your medical practice's future growth.</p>
+                            <div class="service-features">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Network architecture</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Cloud integration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Security implementation</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Scalability planning</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <h3>Remote Monitoring</h3>
+                            <p>Proactive equipment monitoring and predictive maintenance through advanced IoT solutions.</p>
+                            <div class="service-features">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Real-time monitoring</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Predictive analytics</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Alert systems</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Performance dashboards</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="service-item">
+                            <h3>Software Integration</h3>
+                            <p>Connect your equipment with EMR systems, practice management software, and other applications.</p>
+                            <div class="service-features">
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>EMR integration</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>API development</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Custom interfaces</span>
+                                </div>
+                                <div class="feature-item">
+                                    <div class="feature-icon">✓</div>
+                                    <span>Workflow optimization</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
             <!-- Emergency Support -->
             <div class="emergency-section">
                 <h2>24/7 Emergency Support</h2>
