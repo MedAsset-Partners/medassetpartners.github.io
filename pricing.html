@@ -4,7 +4,7 @@
     
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MedAsset Partners - Pricing Plans</title>
+    <title>MedAsset Partners - Comprehensive Technical Solutions & Pricing</title>
     <style>
         * {
             margin: 0;
@@ -13,7 +13,7 @@
         }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family:  Arial, sans-serif;
             line-height: 1.6;
             color: #333;
             background-color: #f8f9fa;
@@ -23,13 +23,7 @@
             margin: 0 auto;
             padding: 0 20px;
         }
-        footer {
-            background: #333;
-            color: white;
-            text-align: center;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
+        
         /* Header */
         .header {
             background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
@@ -49,6 +43,11 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
         }
         
         .header-content {
@@ -107,7 +106,7 @@
         }
         
         
-        .logo {
+        /* .logo {
             display: flex;
             align-items: center;
             gap: 10px;
@@ -126,7 +125,7 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-        }
+        } */
         
         nav ul {
             display: flex;
@@ -136,7 +135,7 @@
         
         nav a {
             text-decoration: none;
-            color: #333;
+            color: rgb(4, 4, 4);
             font-weight: 500;
             transition: color 0.3s ease;
         }
@@ -153,7 +152,7 @@
         }
 
         .header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             font-weight: 700;
             margin-bottom: 15px;
         }
@@ -161,7 +160,7 @@
         .header p {
             font-size: 1.2rem;
             opacity: 0.9;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
         }
 
@@ -169,6 +168,109 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
+        }
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        /* Service Categories Section */
+        .service-categories {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .service-category {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 5px solid transparent;
+        }
+
+        .service-category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+
+        .service-category.maintenance {
+            border-left-color: #2E86AB;
+        }
+
+        .service-category.automation {
+            border-left-color: #F18F01;
+        }
+
+        .service-category.optimization {
+            border-left-color: #A23B72;
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .maintenance .service-icon {
+            background: linear-gradient(135deg, #2E86AB, #3498db);
+            color: white;
+        }
+
+        .automation .service-icon {
+            background: linear-gradient(135deg, #F18F01, #ff9f40);
+            color: white;
+        }
+
+        .optimization .service-icon {
+            background: linear-gradient(135deg, #A23B72, #c44569);
+            color: white;
+        }
+
+        .service-category h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .service-category p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .service-features {
+            list-style: none;
+            text-align: left;
+        }
+
+        .service-features li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+            font-size: 0.9rem;
+        }
+
+        .service-features li:before {
+            content: "▸";
+            position: absolute;
+            left: 0;
+            color: #2E86AB;
+            font-weight: bold;
         }
 
         .pricing-section {
@@ -181,7 +283,7 @@
         }
 
         .section-title h2 {
-            font-size: 2.2rem;
+            font-size: 2.5rem;
             color: #2E86AB;
             margin-bottom: 15px;
             font-weight: 700;
@@ -313,6 +415,11 @@
             font-weight: bold;
         }
 
+        .plan-features .premium-feature {
+            color: #A23B72;
+            font-weight: 600;
+        }
+
         .cta-button {
             width: 100%;
             padding: 15px 30px;
@@ -337,6 +444,81 @@
 
         .premium .cta-button {
             background: linear-gradient(135deg, #A23B72, #c44569);
+        }
+
+        /* Technical Services Section */
+        .technical-services {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 0;
+        }
+
+        .technical-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .technical-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .technical-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .technical-card h4 {
+            color: #2E86AB;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .technical-card .price-range {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #F18F01;
+            margin-bottom: 15px;
+        }
+
+        .technical-card ul {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .technical-card ul li {
+            padding: 5px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .technical-card ul li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #2E86AB;
+            font-weight: bold;
+        }
+
+        .consultation-cta {
+            background: linear-gradient(135deg, #2E86AB, #3498db);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            width: 100%;
+        }
+
+        .consultation-cta:hover {
+            transform: translateY(-2px);
         }
 
         .addon-section {
@@ -452,6 +634,11 @@
             .contact-btn {
                 width: 250px;
             }
+
+            .service-grid,
+            .technical-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -471,7 +658,7 @@
                 <nav>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="service.html".html">Services</a></li>
+                        <li><a href="service.html">Services</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
                         
@@ -482,17 +669,123 @@
     </header>
   <header class="header">
         <div class="container">
-            <h1>Flexible Service Packages</h1>
-            <p>Choose the perfect maintenance plan for your practice. All plans include expert support and compliance documentation.</p>
+            <h1>Comprehensive Technical Solutions</h1>
+            <p>From equipment maintenance to practice automation and optimization. Choose the perfect service combination for your medical practice's unique needs.</p>
         </div>
     </header>
 
+    <!-- Service Categories Overview -->
+    <section class="service-categories">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Service Pillars</h2>
+                <p>Three core competencies that drive practice efficiency and growth</p>
+            </div>
+
+            <div class="service-grid">
+                <div class="service-category maintenance">
+                    <div class="service-icon">🔧</div>
+                    <h3>Equipment Maintenance</h3>
+                    <p>Comprehensive care for your medical devices with proactive monitoring and compliance support.</p>
+                    <ul class="service-features">
+                        <li>Preventive maintenance programs</li>
+                        <li>Emergency repair services</li>
+                        <li>Compliance documentation</li>
+                        <li>Equipment lifecycle management</li>
+                    </ul>
+                </div>
+
+                <div class="service-category automation">
+                    <div class="service-icon">⚡</div>
+                    <h3>Practice Automation</h3>
+                    <p>Streamline workflows and reduce manual tasks with smart automation solutions.</p>
+                    <ul class="service-features">
+                        <li>Workflow automation design</li>
+                        <li>System integrations</li>
+                        <li>Data management solutions</li>
+                        <li>Custom software implementations</li>
+                    </ul>
+                </div>
+
+                <div class="service-category optimization">
+                    <div class="service-icon">📈</div>
+                    <h3>Performance Optimization</h3>
+                    <p>Maximize efficiency and ROI through data-driven process improvements.</p>
+                    <ul class="service-features">
+                        <li>Equipment utilization analysis</li>
+                        <li>Process efficiency audits</li>
+                        <li>Performance benchmarking</li>
+                        <li>ROI optimization strategies</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Complete Practice Solutions -->
+<section class="pricing-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Complete Practice Solutions</h2>
+      <p>All-inclusive packages combining equipment maintenance and technology services</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card essential">
+        <div class="plan-icon">🧰</div>
+        <h3 class="plan-name">Complete Essentials</h3>
+        <p class="plan-tagline">Full-service foundation package</p>
+        <p style="color: #666;">Starting at</p>
+        <div class="plan-price">$1,100</div>
+        <div class="plan-price-period">per month</div>
+        <ul class="plan-features">
+          <li>Biannual Maintenance</li>
+          <li>Basic automation tools</li>
+          <li>Basic compliance & tracking</li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+      </div>
+
+      <div class="pricing-card standard">
+        <div class="popular-badge">Best Value</div>
+        <div class="plan-icon">🛠️</div>
+        <h3 class="plan-name">Complete Professional</h3>
+        <p class="plan-tagline">Advanced full-service solution</p>
+        <p style="color: #666;">Starting at</p>
+        <div class="plan-price">$2,100</div>
+        <div class="plan-price-period">per month</div>
+        <ul class="plan-features">
+          <li>Quarterly Maintenance</li>
+          <li>Advanced automation + reporting</li>
+          <li>Custom dashboards & support</li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+      </div>
+
+      <div class="pricing-card premium">
+        <div class="plan-icon">🏥</div>
+        <h3 class="plan-name">Complete Enterprise</h3>
+        <p class="plan-tagline">Ultimate practice transformation</p>
+        <p style="color: #666;">Starting at</p>
+        <div class="plan-price">$3,500</div>
+        <div class="plan-price-period">per month</div>
+        <ul class="plan-features">
+          <li>Monthly Maintenance</li>
+          <li>Full automation & optimization suite</li>
+          <li>Dedicated account & tech team</li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <!-- Equipment Maintenance Plans -->
     <section class="pricing-section">
         <div class="container">
             <div class="section-title">
-                <h2>Professional Medical Equipment Services</h2>
-                <p>Comprehensive maintenance plans designed to keep your practice running smoothly. </p>
-                
+                <h2>Equipment Maintenance Plans</h2>
+                <p>Comprehensive maintenance packages designed to keep your practice running smoothly</p>
             </div>
 
             <div class="pricing-grid">
@@ -501,7 +794,8 @@
                     <div class="plan-icon">🔹</div>
                     <h3 class="plan-name">Essential Plan</h3>
                     <p class="plan-tagline">Perfect for solo and wellness clinics</p>
-                    <div class="plan-price">$599</div>
+                    <p style="color: #666;">Starting at</p>
+                    <div class="plan-price">$500</div>
                     <div class="plan-price-period">per month</div>
                     <ul class="plan-features">
                         <li>Biannual Maintenance</li>
@@ -510,8 +804,9 @@
                         <li>Up to 2 Devices</li>
                         <li>+$100 per extra device</li>
                         <li>24/7 Phone Support</li>
+                        <!-- <li>Basic workflow consultation</li> -->
                     </ul>
-                    <button class="cta-button">Call to Get Started</button>
+                    <button class="cta-button">Get Started</button>
                 </div>
 
                 <!-- Standard Plan -->
@@ -520,7 +815,8 @@
                     <div class="plan-icon">🔸</div>
                     <h3 class="plan-name">Standard Plan</h3>
                     <p class="plan-tagline">Ideal for med spas & dermatologists</p>
-                    <div class="plan-price">$1,099</div>
+                    <p style="color: #666;">Starting at</p>
+                    <div class="plan-price">$900</div>
                     <div class="plan-price-period">per month</div>
                     <ul class="plan-features">
                         <li>Quarterly Maintenance</li>
@@ -530,8 +826,10 @@
                         <li>Up to 4 Devices</li>
                         <li>+$150 per extra device</li>
                         <li>Priority Support</li>
+                        <!-- <li class="premium-feature">Process automation review</li>
+                        <li class="premium-feature">Quarterly efficiency reports</li> -->
                     </ul>
-                    <button class="cta-button">Call to Get Started</button>
+                    <button class="cta-button">Get Started</button>
                 </div>
 
                 <!-- Premium Plan -->
@@ -539,7 +837,8 @@
                     <div class="plan-icon">🔶</div>
                     <h3 class="plan-name">Premium Plan</h3>
                     <p class="plan-tagline">For busy practices & multi-site groups</p>
-                    <div class="plan-price">$1,699</div>
+                    <p style="color: #666;">Starting at</p>
+                    <div class="plan-price">$1,500</div>
                     <div class="plan-price-period">per month</div>
                     <ul class="plan-features">
                         <li>Monthly Maintenance</li>
@@ -548,19 +847,174 @@
                         <li>Utilization & End-of-Life Reports</li>
                         <li>Up to 6 Devices</li>
                         <li>Custom quotes beyond 6 devices</li>
-                        <li>Dedicated Account Manager</li>
+                        <!-- <li>Dedicated Account Manager</li> -->
+                        <!-- <li class="premium-feature">Comprehensive automation audit</li>
+                        <li class="premium-feature">Custom optimization roadmap</li>
+                        <li class="premium-feature">Integrated system monitoring</li> -->
                     </ul>
-                    <button class="cta-button"> Call to Get Started</button>
+                    <button class="cta-button">Get Started</button>
                 </div>
             </div>
-            <p style="text-align: center;">*All plans are a baseline price for your practice.  We will customize and tailor the pricing to best serve your practice.</p>
+        </div>
+    </section>
+<!-- Technology Solutions Plans -->
+<section class="pricing-section">
+  <div class="container">
+    <div class="section-title">
+      <h2>Technology Solutions Plans</h2>
+      <p>Pure technology service plans for practices that manage their own equipment maintenance</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card essential">
+        <div class="plan-icon">💻</div>
+        <h3 class="plan-name">Tech Starter</h3>
+        <p class="plan-tagline">Basic automation for growing practices</p>
+        <p style="color: #666;">Starting at</p>
+        <div class="plan-price">$750</div>
+        <div class="plan-price-period">per month</div>
+        <ul class="plan-features">
+          <li>Basic workflow automation</li>
+          <li>Email & task integrations</li>
+          <li>Digital forms setup</li>
+          <li>1 automation consultation/month</li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+      </div>
+
+      <div class="pricing-card standard">
+        <div class="popular-badge">Most Popular</div>
+        <div class="plan-icon">⚙️</div>
+        <h3 class="plan-name">Tech Professional</h3>
+        <p class="plan-tagline">Advanced automation & optimization</p>
+        <p style="color: #666;">Starting at</p>
+        <div class="plan-price">$1,400</div>
+        <div class="plan-price-period">per month</div>
+        <ul class="plan-features">
+          <li>Custom workflow builds</li>
+          <li>Data sync & dashboards</li>
+          <li>Automated compliance tools</li>
+          <li>Up to 3 system integrations</li>
+          <li>2 consultations/month</li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+      </div>
+
+      <div class="pricing-card premium">
+        <div class="plan-icon">🌐</div>
+        <h3 class="plan-name">Tech Enterprise</h3>
+        <p class="plan-tagline">Complete digital transformation</p>
+        <p style="color: #666;">Starting at</p>
+        <div class="plan-price">$2,500</div>
+        <div class="plan-price-period">per month</div>
+        <ul class="plan-features">
+          <li>Full practice automation suite</li>
+          <li>Custom software workflows</li>
+          <li>Unlimited integrations</li>
+          <li>Dedicated technical manager</li>
+          <li>4+ consultations/month</li>
+        </ul>
+        <button class="cta-button">Get Started</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+    <!-- Technical Services -->
+    <section class="technical-services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Automation & Optimization Services</h2>
+                <p>Custom solutions tailored to your practice's specific operational needs</p>
+            </div>
+
+            <div class="technical-grid">
+                <div class="technical-card">
+                    <h4>Workflow Automation Implementation</h4>
+                    <div class="price-range">$2,500 - $15,000</div>
+                    <ul>
+                        <li>Patient intake automation</li>
+                        <li>Appointment scheduling optimization</li>
+                        <li>Equipment booking systems</li>
+                        <li>Automated compliance tracking</li>
+                        <li>Custom workflow design</li>
+                    </ul>
+                    <button class="consultation-cta" >Request Consultation</button>
+                </div>
+
+                <div class="technical-card">
+                    <h4>System Integration & Data Management</h4>
+                    <div class="price-range">$3,000 - $25,000</div>
+                    <ul>
+                        <li>EMR/EHR system integrations</li>
+                        <li>Equipment data synchronization</li>
+                        <li>Multi-platform connectivity</li>
+                        <li>Real-time reporting dashboards</li>
+                        <li>Data backup & security</li>
+                    </ul>
+                    <button class="consultation-cta">Request Consultation</button>
+                </div>
+
+                <div class="technical-card">
+                    <h4>Performance Optimization Consulting</h4>
+                    <div class="price-range">$1,500 - $8,000</div>
+                    <ul>
+                        <li>Equipment utilization analysis</li>
+                        <li>Process efficiency audits</li>
+                        <li>ROI improvement strategies</li>
+                        <li>Capacity planning</li>
+                        <li>Performance benchmarking</li>
+                    </ul>
+                    <button class="consultation-cta">Request Consultation</button>
+                </div>
+
+                <div class="technical-card">
+                    <h4>Custom Software Development</h4>
+                    <div class="price-range">$5,000 - $50,000</div>
+                    <ul>
+                        <li>Practice-specific applications</li>
+                        <li>Equipment monitoring tools</li>
+                        <li>Patient engagement platforms</li>
+                        <li>Analytics & reporting systems</li>
+                        <li>Mobile app development</li>
+                    </ul>
+                    <button class="consultation-cta">Request Consultation</button>
+                </div>
+
+                <div class="technical-card">
+                    <h4>Digital Transformation Strategy</h4>
+                    <div class="price-range">$2,000 - $12,000</div>
+                    <ul>
+                        <li>Technology roadmap development</li>
+                        <li>Change management planning</li>
+                        <li>Staff training programs</li>
+                        <li>Implementation timeline</li>
+                        <li>Success metrics definition</li>
+                    </ul>
+                    <button class="consultation-cta">Request Consultation</button>
+                </div>
+
+                <div class="technical-card">
+                    <h4>Ongoing Technical Support</h4>
+                    <div class="price-range">$500 - $3,000/month</div>
+                    <ul>
+                        <li>System monitoring & maintenance</li>
+                        <li>Technical helpdesk support</li>
+                        <li>Software updates & patches</li>
+                        <li>Performance optimization</li>
+                        <li>Emergency technical response</li>
+                    </ul>
+                    <button class="consultation-cta">Request Consultation</button>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="addon-section">
         <div class="container">
             <div class="section-title">
-                <h2>Add-On Services</h2>
+                <h2>Additional Services</h2>
                 <p>Enhance your service package with these specialized offerings</p>
             </div>
 
@@ -572,9 +1026,9 @@
                 </div>
 
                 <div class="addon-card">
-                    <h4>Asset Tagging</h4>
-                    <div class="addon-price">$350</div>
-                    <p>one-time setup</p>
+                    <h4>Asset Tagging & Inventory</h4>
+                    <div class="addon-price">$450</div>
+                    <p>per facility</p>
                 </div>
 
                 <div class="addon-card">
@@ -588,21 +1042,29 @@
                     <div class="addon-price">$250</div>
                     <p>+ parts cost</p>
                 </div>
-                <div class="addon-card">
-                    <h4>Device Inventory and Documentation</h4>
-                    <div class="addon-price">$450</div>
-                    <p>per facility</p>
-                </div>
+
                 <div class="addon-card">
                     <h4>Equipment Training for Staff</h4>
                     <div class="addon-price">$185</div>
                     <p>per session</p>
                 </div>
+
+                <div class="addon-card">
+                    <h4>Technology Assessment</h4>
+                    <div class="addon-price">$750</div>
+                    <p>comprehensive audit</p>
+                </div>
+
+                <div class="addon-card">
+                    <h4>Process Documentation</h4>
+                    <div class="addon-price">$350</div>
+                    <p>per workflow</p>
+                </div>
             </div>
         </div>
     </section>
-
-    <section class="contact-section">
+    
+<section class="contact-section">
         <div class="container">
             <h3>Ready to Get Started?</h3>
             <p>Our equipment specialists are ready to help you choose the perfect plan for your practice</p>
@@ -613,11 +1075,9 @@
         </div>
     </section>
 </body>
-
     <footer>
         <div class="container">
             <p>&copy; 2025 MedAsset Partners. All rights reserved. | Phone: (480) 840-7352 | Email: contact@medassetpartners.com</p>
         </div>
     </footer>
-
-</html>
+            
