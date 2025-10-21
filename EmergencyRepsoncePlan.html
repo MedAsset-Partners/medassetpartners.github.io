@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Response Plan - Equipment & Technology Failures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #dce7ec 0%, #dce8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #E74C3C 0%, #ff6b6b 100%);
+            color: white;
+            padding: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.7; }
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .logo-mini {
+            display: flex;
+            align-items: center;
+        }
+        
+        .mini-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mini-cross {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .mini-cross::before,
+        .mini-cross::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 1px;
+        }
+        
+        .mini-cross::before {
+            width: 3px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .mini-cross::after {
+            width: 20px;
+            height: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .logo-text {
+            font-size: 18px;
+            font-weight: 700;
+        }
+        
+        .logo-subtitle {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .emergency-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+            animation: blink 2s ease-in-out infinite;
+        }
+        
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            25%, 75% { opacity: 0.7; }
+        }
+        
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+        
+        .page-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #E74C3C;
+            margin-bottom: 1rem;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .page-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+        
+        /* Emergency Contact Card */
+        .emergency-contact {
+            background: linear-gradient(135deg, #E74C3C 0%, #ff6b6b 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(231, 76, 60, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .emergency-contact::before {
+            content: '🚨';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 4rem;
+            opacity: 0.2;
+            animation: spin 4s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        .emergency-contact h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .emergency-phone {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 1rem 0;
+        }
+        
+        .emergency-button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            margin: 10px;
+        }
+        
+        .emergency-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Response Plan Sections */
+        .response-sections {
+            display: grid;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .response-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .response-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+        }
+        
+        .response-card.critical::before { background: linear-gradient(90deg, #E74C3C, #ff6b6b); }
+        .response-card.assessment::before { background: linear-gradient(90deg, #FF9800, #FFB74D); }
+        .response-card.immediate::before { background: linear-gradient(90deg, #2196F3, #64B5F6); }
+        .response-card.communication::before { background: linear-gradient(90deg, #9C27B0, #BA68C8); }
+        .response-card.recovery::before { background: linear-gradient(90deg, #4CAF50, #66BB6A); }
+        
+        .response-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .section-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-right: 1rem;
+            color: white;
+        }
+        
+        .response-card.critical .section-icon { background: linear-gradient(45deg, #E74C3C, #ff6b6b); }
+        .response-card.assessment .section-icon { background: linear-gradient(45deg, #FF9800, #FFB74D); }
+        .response-card.immediate .section-icon { background: linear-gradient(45deg, #2196F3, #64B5F6); }
+        .response-card.communication .section-icon { background: linear-gradient(45deg, #9C27B0, #BA68C8); }
+        .response-card.recovery .section-icon { background: linear-gradient(45deg, #4CAF50, #66BB6A); }
+        
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.25rem;
+        }
+        
+        .action-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .action-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            background: #f8f9ff;
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .critical .action-item { border-left-color: #E74C3C; }
+        .assessment .action-item { border-left-color: #FF9800; }
+        .immediate .action-item { border-left-color: #2196F3; }
+        .communication .action-item { border-left-color: #9C27B0; }
+        .recovery .action-item { border-left-color: #4CAF50; }
+        
+        .action-item:hover {
+            background: #e8f2ff;
+            transform: translateX(5px);
+        }
+        
+        .step-number {
+            background: #2E86AB;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-right: 0.75rem;
+            flex-shrink: 0;
+        }
+        
+        .action-text {
+            flex: 1;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+        
+        .action-text strong {
+            color: #333;
+        }
+        
+        /* Equipment Priority Matrix */
+        .priority-matrix {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .matrix-title {
+            text-align: center;
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        
+        .priority-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .priority-level {
+            padding: 1.5rem;
+            border-radius: 15px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .priority-critical {
+            background: linear-gradient(135deg, #ffebee, #ffcdd2);
+            border: 2px solid #E74C3C;
+        }
+        
+        .priority-high {
+            background: linear-gradient(135deg, #fff3e0, #ffe0b2);
+            border: 2px solid #FF9800;
+        }
+        
+        .priority-medium {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border: 2px solid #2196F3;
+        }
+        
+        .priority-low {
+            background: linear-gradient(135deg, #e8f5e8, #c8e6c8);
+            border: 2px solid #4CAF50;
+        }
+        
+        .priority-label {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .priority-critical .priority-label { color: #E74C3C; }
+        .priority-high .priority-label { color: #FF9800; }
+        .priority-medium .priority-label { color: #2196F3; }
+        .priority-low .priority-label { color: #4CAF50; }
+        
+        .priority-description {
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .equipment-examples {
+            list-style: none;
+            font-size: 0.85rem;
+            color: #666;
+        }
+        
+        .equipment-examples li {
+            margin-bottom: 0.25rem;
+        }
+        
+        /* Contact Directory */
+        .contact-directory {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .contact-section {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+            border-radius: 15px;
+            border-left: 4px solid #2E86AB;
+        }
+        
+        .contact-section h4 {
+            color: #2E86AB;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-section h4::before {
+            content: '📞';
+            margin-right: 0.5rem;
+        }
+        
+        .contact-info {
+            list-style: none;
+        }
+        
+        .contact-info li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .contact-info strong {
+            color: #333;
+        }
+        
+        .contact-info a {
+            color: #2E86AB;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Print Styles */
+        .print-controls {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        
+        .print-button {
+            background: #2E86AB;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .print-button:hover {
+            background: #256e8a;
+            transform: translateY(-2px);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .emergency-phone {
+                font-size: 2rem;
+            }
+            
+            .priority-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media print {
+            body { background: white; }
+            .print-controls, .emergency-button { display: none; }
+            .response-card { page-break-inside: avoid; margin-bottom: 1rem; }
+            .emergency-contact::before { display: none; }
+        }
+        
+        /* Form Styling */
+        .customization-form {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .form-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 2rem;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-group label {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2E86AB;
+        }
+        
+        .update-button {
+            background: #2E86AB;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .update-button:hover {
+            background: #256e8a;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo-mini">
+                    <div class="mini-icon">
+                        <div class="mini-cross"></div>
+                    </div>
+                    <div>
+                        <div class="logo-text">MedAsset Partners</div>
+                        <div class="logo-subtitle">Medical Equipment Excellence</div>
+                    </div>
+                </div>
+                <div class="emergency-badge">🚨 EMERGENCY RESPONSE PLAN</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <h1 class="page-title">Equipment & Technology Emergency Response Plan</h1>
+            <p class="page-subtitle">Immediate action protocols for equipment failures and technology disruptions</p>
+            
+            <!-- Emergency Contact -->
+            <div class="emergency-contact">
+                <h2>IMMEDIATE EMERGENCY SUPPORT</h2>
+                <p>Equipment down? Every minute costs money!</p>
+                <div class="emergency-phone" id="emergencyPhone">(480) 840-7352</div>
+                <a href="tel:4808407352" class="emergency-button">📞 CALL NOW</a>
+                <a href="mailto:emergency@medassetpartners.com" class="emergency-button">📧 EMAIL SUPPORT</a>
+            </div>
+
+            <!-- Customization Form -->
+            <div class="customization-form">
+                <h3 class="form-title">📝 Customize Your Emergency Plan</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="facilityName">Facility Name</label>
+                        <input type="text" id="facilityName" placeholder="Enter your facility name">
+                    </div>
+                    <div class="form-group">
+                        <label for="facilityPhone">Main Phone</label>
+                        <input type="tel" id="facilityPhone" placeholder="(555) 123-4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="emergencyContact">Emergency Contact</label>
+                        <input type="text" id="emergencyContact" placeholder="Contact person name">
+                    </div>
+                    <div class="form-group">
+                        <label for="backupLocation">Backup Location</label>
+                        <input type="text" id="backupLocation" placeholder="Alternative facility address">
+                    </div>
+                </div>
+                <button class="update-button" onclick="updatePlan()">Update Plan</button>
+            </div>
+
+            <!-- Priority Matrix -->
+            <div class="priority-matrix">
+                <h2 class="matrix-title">Equipment Priority Classification</h2>
+                <div class="priority-grid">
+                    <div class="priority-level priority-critical">
+                        <div class="priority-label">🔴 CRITICAL</div>
+                        <div class="priority-description">Life-supporting or revenue-critical equipment</div>
+                        <ul class="equipment-examples">
+                            <li>• Ventilators & Life Support</li>
+                            <li>• MRI/CT Scanners</li>
+                            <li>• Surgical Equipment</li>
+                            <li>• Patient Monitoring</li>
+                        </ul>
+                    </div>
+                    <div class="priority-level priority-high">
+                        <div class="priority-label">🟡 HIGH</div>
+                        <div class="priority-description">Essential for daily operations</div>
+                        <ul class="equipment-examples">
+                            <li>• Laser Systems</li>
+                            <li>• Ultrasound Equipment</li>
+                            <li>• EHR Systems</li>
+                            <li>• Scheduling Software</li>
+                        </ul>
+                    </div>
+                    <div class="priority-level priority-medium">
+                        <div class="priority-label">🔵 MEDIUM</div>
+                        <div class="priority-description">Important but not immediately critical</div>
+                        <ul class="equipment-examples">
+                            <li>• Aesthetic Equipment</li>
+                            <li>• Office Computers</li>
+                            <li>• Printers/Scanners</li>
+                            <li>• HVAC Systems</li>
+                        </ul>
+                    </div>
+                    <div class="priority-level priority-low">
+                        <div class="priority-label">🟢 LOW</div>
+                        <div class="priority-description">Nice to have, minimal impact</div>
+                        <ul class="equipment-examples">
+                            <li>• Entertainment Systems</li>
+                            <li>• Non-critical Accessories</li>
+                            <li>• Backup Equipment</li>
+                            <li>• Training Devices</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Response Protocols -->
+            <div class="response-sections">
+                <!-- Step 1: Critical Response -->
+                <div class="response-card critical">
+                    <div class="section-header">
+                        <div class="section-icon">🚨</div>
+                        <div>
+                            <div class="section-title">Step 1: Critical Response (0-5 minutes)</div>
+                            <div class="section-subtitle">Immediate safety and containment actions</div>
+                        </div>
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="step-number">1</div>
+                            <div class="action-text"><strong>Ensure Patient Safety:</strong> Immediately move patients to safe area if equipment poses risk</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">2</div>
+                            <div class="action-text"><strong>Power Down Equipment:</strong> If safe to do so, power down malfunctioning equipment</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">3</div>
+                            <div class="action-text"><strong>Secure Area:</strong> Prevent unauthorized access to failed equipment</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">4</div>
+                            <div class="action-text"><strong>Call Emergency Line:</strong> Contact MedAsset Partners at <span id="displayPhone">(480) 840-7352</span></div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">5</div>
+                            <div class="action-text"><strong>Activate Backup Systems:</strong> Switch to backup equipment if available</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 2: Damage Assessment -->
+                <div class="response-card assessment">
+                    <div class="section-header">
+                        <div class="section-icon">🔍</div>
+                        <div>
+                            <div class="section-title">Step 2: Damage Assessment (5-15 minutes)</div>
+                            <div class="section-subtitle">Evaluate scope and impact of failure</div>
+                        </div>
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="step-number">1</div>
+                            <div class="action-text"><strong>Document Symptoms:</strong> Record error messages, unusual sounds, visual indicators</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">2</div>
+                            <div class="action-text"><strong>Check Power Sources:</strong> Verify electrical connections and power supply status</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">3</div>
+                            <div class="action-text"><strong>Test Related Systems:</strong> Check if failure has affected connected equipment</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">4</div>
+                            <div class="action-text"><strong>Estimate Impact:</strong> Determine number of procedures/patients affected</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">5</div>
+                            <div class="action-text"><strong>Photo Documentation:</strong> Take photos of error screens and visible damage</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 3: Immediate Actions -->
+                <div class="response-card immediate">
+                    <div class="section-header">
+                        <div class="section-icon">⚡</div>
+                        <div>
+                            <div class="section-title">Step 3: Immediate Actions (15-30 minutes)</div>
+                            <div class="section-subtitle">Stabilize operations and prepare for repair</div>
+                        </div>
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="step-number">1</div>
+                            <div class="action-text"><strong>Reschedule Appointments:</strong> Contact affected patients and reschedule procedures</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">2</div>
+                            <div class="action-text"><strong>Prepare Work Area:</strong> Clear access to equipment for technician arrival</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">3</div>
+                            <div class="action-text"><strong>Gather Information:</strong> Collect equipment manuals, service history, warranty info</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">4</div>
+                            <div class="action-text"><strong>Alternative Arrangements:</strong> Contact partner facilities for emergency capacity</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">5</div>
+                            <div class="action-text"><strong>Staff Briefing:</strong> Inform all staff of situation and adjusted procedures</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 4: Communication Protocol -->
+                <div class="response-card communication">
+                    <div class="section-header">
+                        <div class="section-icon">📢</div>
+                        <div>
+                            <div class="section-title">Step 4: Communication Protocol (Ongoing)</div>
+                            <div class="section-subtitle">Keep stakeholders informed throughout process</div>
+                        </div>
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="step-number">1</div>
+                            <div class="action-text"><strong>Notify Administration:</strong> Alert facility management and medical directors</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">2</div>
+                            <div class="action-text"><strong>Update Patients:</strong> Communicate delays and alternative arrangements</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">3</div>
+                            <div class="action-text"><strong>Insurance Contact:</strong> Notify insurance providers if applicable</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">4</div>
+                            <div class="action-text"><strong>Vendor Coordination:</strong> Maintain regular contact with MedAsset Partners technicians</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">5</div>
+                            <div class="action-text"><strong>Progress Updates:</strong> Provide hourly updates to key stakeholders</div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Step 5: Recovery & Follow-up -->
+                <div class="response-card recovery">
+                    <div class="section-header">
+                        <div class="section-icon">🔄</div>
+                        <div>
+                            <div class="section-title">Step 5: Recovery & Follow-up (Post-Resolution)</div>
+                            <div class="section-subtitle">Restore operations and prevent future incidents</div>
+                        </div>
+                    </div>
+                    <ul class="action-list">
+                        <li class="action-item">
+                            <div class="step-number">1</div>
+                            <div class="action-text"><strong>System Testing:</strong> Thoroughly test repaired equipment before resuming operations</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">2</div>
+                            <div class="action-text"><strong>Staff Training:</strong> Brief staff on any system changes or new procedures</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">3</div>
+                            <div class="action-text"><strong>Documentation:</strong> Complete incident report with timeline and lessons learned</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">4</div>
+                            <div class="action-text"><strong>Schedule Makeup:</strong> Reschedule displaced appointments at earliest opportunity</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">5</div>
+                            <div class="action-text"><strong>Prevention Review:</strong> Analyze root cause and implement preventive measures</div>
+                        </li>
+                        <li class="action-item">
+                            <div class="step-number">6</div>
+                            <div class="action-text"><strong>Plan Update:</strong> Revise emergency response plan based on experience</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Emergency Contact Directory -->
+            <div class="contact-directory">
+                <h2 class="matrix-title">Emergency Contact Directory</h2>
+                <div class="contact-grid">
+                    <div class="contact-section">
+                        <h4>MedAsset Partners Emergency</h4>
+                        <ul class="contact-info">
+                            <li><strong>24/7 Emergency Line:</strong> <a href="tel:4808407352" id="contactPhone1">(480) 840-7352</a></li>
+                            <li><strong>Emergency Email:</strong> <a href="mailto:emergency@medassetpartners.com">emergency@medassetpartners.com</a></li>
+                            <li><strong>Text Support:</strong> <a href="sms:4808407352">(480) 840-7352</a></li>
+                            <li><strong>Online Portal:</strong> <a href="http://www.medassetpartners.com">Emergency Portal</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-section">
+                        <h4>Facility Management</h4>
+                        <ul class="contact-info">
+                            <li><strong>Facility Manager:</strong> <span id="facilityManager">[Enter Name]</span></li>
+                            <li><strong>Phone:</strong> <span id="managerPhone">[Enter Number]</span></li>
+                            <li><strong>Medical Director:</strong> <span id="medicalDirector">[Enter Name]</span></li>
+                            <li><strong>After Hours:</strong> <span id="afterHours">[Enter Number]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-section">
+                        <h4>Utilities & Support</h4>
+                        <ul class="contact-info">
+                            <li><strong>Electrical:</strong> <span id="electricalContact">[Local Electrician]</span></li>
+                            <li><strong>IT Support:</strong> <span id="itSupport">[IT Provider]</span></li>
+                            <li><strong>Building Security:</strong> <span id="securityContact">[Security Company]</span></li>
+                            <li><strong>HVAC Emergency:</strong> <span id="hvacContact">[HVAC Service]</span></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="contact-section">
+                        <h4>Backup Resources</h4>
+                        <ul class="contact-info">
+                            <li><strong>Partner Facility:</strong> <span id="partnerFacility">[Partner Name]</span></li>
+                            <li><strong>Backup Location:</strong> <span id="backupFacility">[Backup Address]</span></li>
+                            <li><strong>Equipment Rental:</strong> <span id="rentalCompany">[Rental Service]</span></li>
+                            <li><strong>Transport Service:</strong> <span id="transportService">[Medical Transport]</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Reference Checklist -->
+            <div class="priority-matrix">
+                <h2 class="matrix-title">Emergency Response Quick Checklist</h2>
+                <div class="response-card">
+                    <div class="checklist-container">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                            <div>
+                                <h4 style="color: #E74C3C; margin-bottom: 1rem;">⏰ FIRST 5 MINUTES</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: 0.5rem;">☐ Ensure patient safety</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Power down equipment</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Call (480) 840-7352</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Activate backup systems</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Secure area</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: #FF9800; margin-bottom: 1rem;">🔍 NEXT 10 MINUTES</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: 0.5rem;">☐ Document symptoms</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Check power sources</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Test related systems</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Take photos</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Estimate impact</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h4 style="color: #2196F3; margin-bottom: 1rem;">📞 ONGOING ACTIONS</h4>
+                                <ul style="list-style: none; padding: 0;">
+                                    <li style="margin-bottom: 0.5rem;">☐ Reschedule patients</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Notify administration</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Clear technician access</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Brief staff</li>
+                                    <li style="margin-bottom: 0.5rem;">☐ Provide updates</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Print Controls -->
+            <div class="print-controls">
+                <button class="print-button" onclick="window.print()">🖨️ Print Emergency Plan</button>
+                <button class="print-button" onclick="downloadPlan()">💾 Save as PDF</button>
+                <button class="print-button" onclick="exportContacts()">📱 Export Contacts</button>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="emergency-contact" style="background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);">
+                <h2>Need Help Setting Up Your Emergency Plan?</h2>
+                <p>Our experts can customize this plan for your specific facility and equipment needs.</p>
+                <div style="font-size: 1.8rem; margin: 1rem 0;">Professional Consultation Available</div>
+                <a href="tel:4808407352" class="emergency-button">📞 Call (480) 840-7352</a>
+                <a href="mailto:info@medassetpartners.com" class="emergency-button">📧 Get Consultation</a>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        // Load saved facility information
+        function loadFacilityInfo() {
+            const savedInfo = localStorage.getItem('facilityEmergencyInfo');
+            if (savedInfo) {
+                const info = JSON.parse(savedInfo);
+                Object.keys(info).forEach(key => {
+                    const element = document.getElementById(key);
+                    if (element) {
+                        if (element.tagName === 'INPUT') {
+                            element.value = info[key];
+                        } else {
+                            element.textContent = info[key];
+                        }
+                    }
+                });
+            }
+        }
+
+        // Update emergency plan with custom information
+        function updatePlan() {
+            const facilityName = document.getElementById('facilityName').value;
+            const facilityPhone = document.getElementById('facilityPhone').value;
+            const emergencyContact = document.getElementById('emergencyContact').value;
+            const backupLocation = document.getElementById('backupLocation').value;
+
+            // Update display elements
+            if (facilityName) {
+                document.querySelectorAll('.facility-name').forEach(el => el.textContent = facilityName);
+            }
+            
+            // Save to localStorage
+            const facilityInfo = {
+                facilityName: facilityName,
+                facilityPhone: facilityPhone,
+                emergencyContact: emergencyContact,
+                backupLocation: backupLocation,
+                facilityManager: emergencyContact,
+                managerPhone: facilityPhone,
+                backupFacility: backupLocation
+            };
+            
+            localStorage.setItem('facilityEmergencyInfo', JSON.stringify(facilityInfo));
+            
+            // Update contact directory
+            document.getElementById('facilityManager').textContent = emergencyContact || '[Enter Name]';
+            document.getElementById('managerPhone').textContent = facilityPhone || '[Enter Number]';
+            document.getElementById('backupFacility').textContent = backupLocation || '[Backup Address]';
+            
+            alert('Emergency plan updated successfully!');
+        }
+
+        // Download plan as PDF (simplified version)
+        function downloadPlan() {
+            window.print();
+        }
+
+        // Export emergency contacts
+        function exportContacts() {
+            const contacts = `MedAsset Partners Emergency Contacts
+            
+📞 EMERGENCY HOTLINE: (480) 840-7352
+📧 EMAIL: emergency@medassetpartners.com
+🌐 WEBSITE: www.medassetpartners.com
+
+⚠️ SAVE THESE CONTACTS IN YOUR PHONE FOR QUICK ACCESS
+
+24/7 Support Available
+Same-day service calls
+Emergency diagnostics
+Parts sourcing
+
+Call immediately when equipment fails!`;
+
+            const blob = new Blob([contacts], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'medasset-emergency-contacts.txt';
+            a.click();
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadFacilityInfo();
+            
+            // Animate cards on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.response-card, .priority-level').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Add emergency sound alert function
+        function playEmergencyAlert() {
+            // Create audio context for emergency sound
+            if ('speechSynthesis' in window) {
+                const utterance = new SpeechSynthesisUtterance('Emergency response protocol activated. Please follow the steps on screen.');
+                utterance.rate = 1.2;
+                utterance.pitch = 1.1;
+                speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Add keyboard shortcut for emergency
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.shiftKey && e.key === 'E') {
+                e.preventDefault();
+                window.location.href = 'tel:4808407352';
+            }
+        });
+    </script>
+</body>
+</html>

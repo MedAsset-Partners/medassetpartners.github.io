@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAsset Partners - Compliance Readiness Checklist</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .logo-mini {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mini-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mini-cross {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .mini-cross::before,
+        .mini-cross::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 1px;
+        }
+        
+        .mini-cross::before {
+            width: 3px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .mini-cross::after {
+            width: 20px;
+            height: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        /* Score Display */
+        .score-display {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 8px solid #e9ecef;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            position: relative;
+            transition: all 0.5s ease;
+        }
+        
+        .score-text {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2E86AB;
+        }
+        
+        .score-label {
+            font-size: 1.1rem;
+            color: #666666;
+            margin-bottom: 10px;
+        }
+        
+        .score-status {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        
+        /* Checklist Sections */
+        .checklist-section {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        
+        .section-header {
+            padding: 20px 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 5px solid #2E86AB;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            color: #333333;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 12px;
+            font-size: 1.2rem;
+        }
+        
+        .section-score {
+            font-weight: bold;
+            color: #2E86AB;
+        }
+        
+        .section-items {
+            padding: 0;
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            padding: 18px 25px;
+            border-bottom: 1px solid #eeeeee;
+            transition: all 0.3s ease;
+        }
+        
+        .checklist-item:last-child {
+            border-bottom: none;
+        }
+        
+        .checklist-item:hover {
+            background: #f8f9fa;
+        }
+        
+        .item-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            margin-right: 15px;
+            margin-top: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .item-checkbox.checked {
+            background: #27AE60;
+            border-color: #27AE60;
+        }
+        
+        .item-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            top: -2px;
+            left: 3px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .item-content {
+            flex: 1;
+        }
+        
+        .item-text {
+            font-size: 0.95rem;
+            color: #333333;
+            margin-bottom: 5px;
+        }
+        
+        .item-description {
+            font-size: 0.85rem;
+            color: #666666;
+            line-height: 1.4;
+        }
+        
+        .item-priority {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        
+        .priority-high {
+            background: #E74C3C;
+            color: white;
+        }
+        
+        .priority-medium {
+            background: #F39C12;
+            color: white;
+        }
+        
+        .priority-low {
+            background: #27AE60;
+            color: white;
+        }
+        
+        /* Action Section */
+        .action-section {
+            background: linear-gradient(135deg, #2E86AB 0%, #A23B72 50%, #F18F01 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .action-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+        
+        .action-section p {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #F18F01;
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(241, 143, 1, 0.4);
+            margin: 0 10px 10px 0;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(241, 143, 1, 0.6);
+        }
+        
+        .cta-button.secondary {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .cta-button.secondary:hover {
+            background: white;
+            color: #2E86AB;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: #666666;
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        @keyframes shimmer {
+            0%, 100% { transform: translateX(-100%) translateY(-100%); }
+            50% { transform: translateX(100%) translateY(100%); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .checklist-item {
+                padding: 15px 20px;
+            }
+            
+            .section-header {
+                padding: 15px 20px;
+            }
+            
+            .cta-button {
+                display: block;
+                margin: 10px auto;
+                width: fit-content;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="header-content">
+                <div class="logo-mini">
+                    <div class="mini-icon">
+                        <div class="mini-cross"></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 18px; font-weight: 700; margin-bottom: 2px;">MedAsset Partners</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Medical Equipment Excellence</div>
+                    </div>
+                </div>
+                <h1>Compliance Readiness Checklist</h1>
+                <p class="subtitle">Assess your practice's compliance status and identify areas for improvement</p>
+            </div>
+        </div>
+
+        <!-- Score Display -->
+        <div class="score-display">
+            <div class="score-circle" id="scoreCircle">
+                <div class="score-text" id="scoreText">0%</div>
+            </div>
+            <div class="score-label">Compliance Score</div>
+            <div class="score-status" id="scoreStatus">Getting Started</div>
+        </div>
+
+        <!-- Equipment Maintenance Section -->
+        <div class="checklist-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <div class="section-icon" style="background: linear-gradient(45deg, #27AE60, #2ECC71);">🔧</div>
+                    Equipment Maintenance & Documentation
+                </div>
+                <div class="section-score" id="maintenance-score">0/8</div>
+            </div>
+            <div class="section-items" data-section="maintenance">
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Preventive Maintenance Schedules
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">All medical equipment has documented preventive maintenance schedules per manufacturer recommendations</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Service Records Documentation
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Complete service history and maintenance records are maintained and easily accessible</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Equipment Inventory Management
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Current inventory of all medical equipment with serial numbers, model numbers, and locations</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Warranty Tracking
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Active tracking of equipment warranties and maintenance contract expiration dates</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Performance Testing Documentation
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Regular performance testing results documented with calibration certificates</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Emergency Response Procedures
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Documented procedures for equipment failures and emergency service contacts</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Staff Training Records
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Documentation of staff training on equipment operation and basic troubleshooting</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Vendor Qualification Documentation
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Records of service provider certifications and qualifications</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety & Quality Section -->
+        <div class="checklist-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <div class="section-icon" style="background: linear-gradient(45deg, #E74C3C, #C0392B);">🛡️</div>
+                    Safety & Quality Assurance
+                </div>
+                <div class="section-score" id="safety-score">0/6</div>
+            </div>
+            <div class="section-items" data-section="safety">
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Risk Assessment Documentation
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Comprehensive risk assessments for all medical equipment and procedures</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Incident Reporting System
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">System in place for reporting and tracking equipment-related incidents</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Quality Control Procedures
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Regular quality control checks and documentation of results</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Equipment Safety Inspections
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Regular safety inspections by qualified technicians with documented results</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Environmental Controls
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Monitoring and documentation of environmental conditions (temperature, humidity, etc.)</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Emergency Preparedness Plan
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Comprehensive emergency response plan including equipment backup procedures</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regulatory Compliance Section -->
+        <div class="checklist-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <div class="section-icon" style="background: linear-gradient(45deg, #8E44AD, #9B59B6);">📋</div>
+                    Regulatory Compliance
+                </div>
+                <div class="section-score" id="regulatory-score">0/7</div>
+            </div>
+            <div class="section-items" data-section="regulatory">
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            FDA Medical Device Reporting
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Compliance with FDA MDR requirements for adverse event reporting</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            State Licensing Requirements
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Current state licenses and permits for medical equipment operation</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            HIPAA Compliance
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Equipment and procedures comply with HIPAA privacy and security requirements</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            OSHA Safety Standards
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Workplace safety standards compliance for medical equipment operation</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Joint Commission Standards
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Compliance with relevant Joint Commission standards for equipment management</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Insurance Requirements
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Equipment maintenance meets insurance policy requirements and coverage terms</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Audit Trail Management
+                            <span class="item-priority priority-low">LOW</span>
+                        </div>
+                        <div class="item-description">Comprehensive audit trails for all compliance-related activities and documentation</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology & Data Security Section -->
+        <div class="checklist-section">
+            <div class="section-header">
+                <div class="section-title">
+                    <div class="section-icon" style="background: linear-gradient(45deg, #2196F3, #64B5F6);">💻</div>
+                    Technology & Data Security
+                </div>
+                <div class="section-score" id="technology-score">0/5</div>
+            </div>
+            <div class="section-items" data-section="technology">
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Data Backup Procedures
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Regular automated backups of all equipment data and system configurations</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Cybersecurity Protocols
+                            <span class="item-priority priority-high">HIGH</span>
+                        </div>
+                        <div class="item-description">Network security measures for connected medical devices and systems</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Software Update Management
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">Systematic approach to equipment software updates and patch management</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Access Control Systems
+                            <span class="item-priority priority-medium">MEDIUM</span>
+                        </div>
+                        <div class="item-description">User authentication and access control for equipment and data systems</div>
+                    </div>
+                </div>
+                <div class="checklist-item">
+                    <div class="item-checkbox" onclick="toggleCheck(this)"></div>
+                    <div class="item-content">
+                        <div class="item-text">
+                            Integration Documentation
+                            <span class="item-priority priority-low">LOW</span>
+                        </div>
+                        <div class="item-description">Documentation of system integrations and data flow between equipment and practice management systems</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <div class="action-section">
+            <h2>Ready to Improve Your Compliance Score?</h2>
+            <p>MedAsset Partners specializes in helping medical practices achieve and maintain full compliance while reducing costs by 30-50%. Let our expert team conduct a comprehensive compliance audit and develop a customized improvement plan.</p>
+            <a href="tel:4808407352" class="cta-button">Call (480) 840-7352</a>
+            <a href="mailto:info@medassetpartners.com" class="cta-button secondary">Request Audit</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>&copy; 2025 MedAsset Partners. All rights reserved. | Medical Equipment Excellence<br>
+            This checklist is for informational purposes only and does not constitute legal or regulatory advice.</p>
+        </div>
+    </div>
+
+    <script>
+        let totalItems = 0;
+        let checkedItems = 0;
+
+        function initializeChecklist() {
+            totalItems = document.querySelectorAll('.item-checkbox').length;
+            updateAllScores();
+        }
+
+        function toggleCheck(checkbox) {
+            checkbox.classList.toggle('checked');
+            updateAllScores();
+        }
+
+        function updateAllScores() {
+            // Update section scores
+            const sections = ['maintenance', 'safety', 'regulatory', 'technology'];
+            
+            sections.forEach(section => {
+                const sectionElement = document.querySelector(`[data-section="${section}"]`);
+                const checkboxes = sectionElement.querySelectorAll('.item-checkbox');
+                const checkedBoxes = sectionElement.querySelectorAll('.item-checkbox.checked');
+                
+                document.getElementById(`${section}-score`).textContent = 
+                    `${checkedBoxes.length}/${checkboxes.length}`;
+            });
+
+            // Update overall score
+            checkedItems = document.querySelectorAll('.item-checkbox.checked').length;
+            const percentage = Math.round((checkedItems / totalItems) * 100);
+            
+            document.getElementById('scoreText').textContent = percentage + '%';
+            
+            // Update score circle color and status
+            const circle = document.getElementById('scoreCircle');
+            const status = document.getElementById('scoreStatus');
+            
+            if (percentage >= 90) {
+                circle.style.borderColor = '#27AE60';
+                status.textContent = 'Excellent Compliance';
+                status.style.background = 'linear-gradient(45deg, #27AE60, #2ECC71)';
+                status.style.color = 'white';
+            } else if (percentage >= 75) {
+                circle.style.borderColor = '#F39C12';
+                status.textContent = 'Good Compliance';
+                status.style.background = 'linear-gradient(45deg, #F39C12, #F1C40F)';
+                status.style.color = 'white';
+            } else if (percentage >= 50) {
+                circle.style.borderColor = '#F39C12';
+                status.textContent = 'Needs Improvement';
+                status.style.background = 'linear-gradient(45deg, #F39C12, #F1C40F)';
+                status.style.color = 'white';
+            } else {
+                circle.style.borderColor = '#E74C3C';
+                status.textContent = 'Critical Gaps';
+                status.style.background = 'linear-gradient(45deg, #E74C3C, #C0392B)';
+                status.style.color = 'white';
+            }
+        }
+
+        // Initialize the checklist when page loads
+        document.addEventListener('DOMContentLoaded', initializeChecklist);
+
+        // Save state to localStorage (for demonstration - won't work in Claude artifacts)
+        function saveState() {
+            const checkboxStates = {};
+            document.querySelectorAll('.item-checkbox').forEach((checkbox, index) => {
+                checkboxStates[index] = checkbox.classList.contains('checked');
+            });
+            // In a real implementation, this would save to localStorage
+            console.log('Saving state:', checkboxStates);
+        }
+
+        // Add save functionality to checkboxes
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('item-checkbox')) {
+                setTimeout(saveState, 100); // Save after state update
+            }
+        });
+    </script>
+</body>
+</html>

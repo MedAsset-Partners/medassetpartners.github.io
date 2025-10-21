@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Resources - MedAsset Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f8f9fa;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Resources Hero Section */
+        .resources-hero {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 50%, #A23B72 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .resources-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.1);
+            z-index: 1;
+        }
+        
+        .resources-hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .resources-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .resources-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.95;
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Free Tools Grid */
+        .free-tools-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2E86AB;
+            margin-bottom: 1rem;
+        }
+        
+        .section-header p {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .tool-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #f0f0f0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tool-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2E86AB, #3498db, #A23B72, #F18F01);
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+        
+        .tool-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(45deg, #2E86AB, #3498db);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            color: white;
+            font-size: 1.5rem;
+        }
+        
+        .tool-card h3 {
+            font-size: 1.4rem;
+            color: #333;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        
+        .tool-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .tool-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+        
+        .tool-features li {
+            color: #666;
+            margin-bottom: 0.5rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .tool-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #2E86AB;
+            font-weight: bold;
+        }
+        
+        .tool-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #2E86AB, #3498db);
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+        }
+        
+        .tool-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(46, 134, 171, 0.4);
+        }
+        
+        /* Featured Calculator Section */
+        .featured-calculator {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 60px 0;
+            margin: 3rem 0;
+        }
+        
+        .calculator-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .calculator-text h3 {
+            font-size: 2rem;
+            color: #2E86AB;
+            margin-bottom: 1rem;
+        }
+        
+        .calculator-text p {
+            color: #666;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .savings-preview {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .savings-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #F18F01;
+            margin-bottom: 0.5rem;
+        }
+        
+        .savings-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .calculator-cta {
+            display: inline-block;
+            background: linear-gradient(45deg, #A23B72, #F18F01);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+        
+        .calculator-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(162, 59, 114, 0.4);
+        }
+        
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #2E86AB 0%, #A23B72 50%, #F18F01 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+        
+        .final-cta h3 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        
+        .cta-button:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .cta-button.primary {
+            background: white;
+            color: #2E86AB;
+        }
+        
+        .cta-button.primary:hover {
+            background: #f8f9fa;
+            color: #A23B72;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .resources-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .resources-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .tools-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .calculator-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-button {
+                width: 250px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Resources Hero Section -->
+    <section class="resources-hero">
+        <div class="container">
+            <div class="resources-hero-content">
+                <h1 class="fade-in-up">Free Medical and Wellness Practice Resources</h1>
+                <p class="fade-in-up">Powerful calculators, checklists, and tools to optimize your practice operations and maximize savings</p>
+                
+                <!-- <div class="hero-stats fade-in-up">
+                    <div class="stat-item">
+                        <span class="stat-number">15+</span>
+                        <span class="stat-label">Free Tools</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Practices Served</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">$75K</span>
+                        <span class="stat-label">Avg. Annual Savings</span>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Free Tools Section -->
+    <section class="free-tools-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Essential Tools for Medical Practices and Wellness Facilities</h2>
+                <p>Download our comprehensive collection of calculators, checklists, and planning tools designed specifically for healthcare facilities</p>
+            </div>
+            
+            <div class="tools-grid">
+                <!-- Budget Planning Worksheet -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">📊</div>
+                    <h3>Budget Planning Worksheet</h3>
+                    <p>Comprehensive budget planning tool to forecast expenses, track spending, and optimize your practice's financial planning.</p>
+                    <ul class="tool-features">
+                        <li>Annual budget forecasting</li>
+                        <li>Category-based expense tracking</li>
+                        <li>Variance analysis reporting</li>
+                        <li>Multi-year projections</li>
+                    </ul>
+                    <a href="Budgetplanning.html" class="tool-cta">Start Planning</a>
+                </div>
+                
+                <!-- Compliance Readiness Checklist -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">📋</div>
+                    <h3>Compliance Readiness Checklist</h3>
+                    <p>Comprehensive checklist to assess your equipment maintenance, compliance status, and identify improvement opportunities.</p>
+                    <ul class="tool-features">
+                        <li>Pre-audit preparation guide</li>
+                        <li>Physical assessment criteria</li>
+                        <li>Documentation review checklist</li>
+                        <li>Financial analysis framework</li>
+                    </ul>
+                    <a href="compliancereadinesschecklist.html" class="tool-cta">Download Checklist</a>
+                </div>
+                
+                <!-- Emergency Response Plan -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">🚨</div>
+                    <h3>Equipment & Technology Emergency Response Plan</h3>
+                    <p>Prepare for equipment failures and technology emergencies with our comprehensive response planning framework.</p>
+                    <ul class="tool-features">
+                        <li>Emergency contact protocols</li>
+                        <li>Equipment failure procedures</li>
+                        <li>Backup system guidelines</li>
+                        <li>Recovery timeline templates</li>
+                    </ul>
+                    <a href="EmergencyResponsePlan.html" class="tool-cta">Create Plan</a>
+                </div>
+                
+                <!-- Equipment Purchase Decision Guide -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">✅</div>
+                    <h3>Equipment Purchase Decision Guide</h3>
+                    <p>Make informed equipment purchasing decisions with our comprehensive evaluation and comparison framework.</p>
+                    <ul class="tool-features">
+                        <li>Cost-benefit analysis tools</li>
+                        <li>Feature comparison matrix</li>
+                        <li>Total cost of ownership calculator</li>
+                        <li>Vendor evaluation criteria</li>
+                    </ul>
+                    <a href="EquipmentPurchaseDecision.html" class="tool-cta">Access Guide</a>
+                </div>
+                
+                <!-- Equipment Risk Analysis Tool -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">⚠️</div>
+                    <h3>Equipment Risk Analysis Tool</h3>
+                    <p>Identify, assess, and prioritize equipment-related risks to ensure patient safety and operational continuity.</p>
+                    <ul class="tool-features">
+                        <li>Risk severity assessment</li>
+                        <li>Probability analysis</li>
+                        <li>Mitigation strategy planning</li>
+                        <li>Priority ranking matrix</li>
+                    </ul>
+                    <a href="EquipmentRiskAnalysisTool.html" class="tool-cta">Analyze Risks</a>
+                </div>
+                
+                <!-- Maintenance Cost Calculator -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">💰</div>
+                    <h3>Maintenance Cost Calculator</h3>
+                    <p>Calculate total cost of ownership, compare OEM vs third-party maintenance costs, and identify potential savings opportunities.</p>
+                    <ul class="tool-features">
+                        <li>ROI analysis for maintenance contracts</li>
+                        <li>Multi-year cost projections</li>
+                        <li>Savings opportunity identification</li>
+                        <li>Budget planning templates</li>
+                    </ul>
+                    <a href="MedicalEquipmentMaintenanceCalculator.html" class="tool-cta">Calculate Costs</a>
+                </div>
+                
+                <!-- Equipment Automation ROI Calculator -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">📈</div>
+                    <h3>Equipment Automation ROI Calculator</h3>
+                    <p>Measure the return on investment for equipment automation, upgrades, and technology implementations.</p>
+                    <ul class="tool-features">
+                        <li>Multi-scenario analysis</li>
+                        <li>Payback period calculation</li>
+                        <li>Efficiency gain metrics</li>
+                        <li>Executive summary reports</li>
+                    </ul>
+                    <a href="ROICalequipautomation.html" class="tool-cta">Calculate ROI</a>
+                </div>
+                
+                <!-- Technology Integration Assessment -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">🔧</div>
+                    <h3>Technology Integration Assessment</h3>
+                    <p>Evaluate your practice's technology infrastructure and identify upgrade opportunities to improve efficiency.</p>
+                    <ul class="tool-features">
+                        <li>Current state analysis</li>
+                        <li>Upgrade priority matrix</li>
+                        <li>Implementation timeline</li>
+                        <li>Budget planning guide</li>
+                    </ul>
+                    <a href="Technologyintegrationassessment.html" class="tool-cta">Start Assessment</a>
+                </div>
+                
+                <!-- Technology Transition Roadmap -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">🗺️</div>
+                    <h3>Technology Transition Roadmap</h3>
+                    <p>Plan and execute technology transitions smoothly with our step-by-step implementation roadmap and timeline.</p>
+                    <ul class="tool-features">
+                        <li>Phase-by-phase planning</li>
+                        <li>Milestone tracking</li>
+                        <li>Resource allocation guide</li>
+                        <li>Risk mitigation strategies</li>
+                    </ul>
+                    <a href="TechTransitionRoadmap.html" class="tool-cta">Build Roadmap</a>
+                </div>
+                
+                <!-- Vendor Performance Scorecard -->
+                <div class="tool-card fade-in-up">
+                    <div class="tool-icon">⭐</div>
+                    <h3>Vendor Performance Scorecard</h3>
+                    <p>Evaluate and compare maintenance service providers with our comprehensive scoring matrix and performance tracking tool.</p>
+                    <ul class="tool-features">
+                        <li>Service quality assessment</li>
+                        <li>Cost comparison matrix</li>
+                        <li>Response time tracking</li>
+                        <li>Contract evaluation guide</li>
+                    </ul>
+                    <a href="Vendorperformancescorecard.html" class="tool-cta">Score Vendors</a>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+
+
+    <!-- Featured Calculator Section -->
+    <section class="featured-calculator">
+        <div class="container">
+            <div class="calculator-content">
+                <div class="calculator-text">
+                    <h3>Featured: Maintenance Savings Calculator</h3>
+                    <p>Our most popular tool helps medical practices discover exactly how much they can save by switching to third-party maintenance services. Get instant results and a detailed breakdown of your potential savings.</p>
+                    <p>The average practice saves <strong>$18,000-$45,000 annually</strong> by optimizing their maintenance strategy. See what your practice could save in less than 2 minutes.</p>
+                    <a href="resources.html#savings-calculator" class="calculator-cta">Calculate Your Savings Now</a>
+                </div>
+                
+                <div class="savings-preview">
+                    <div class="savings-amount">$32,500</div>
+                    <div class="savings-label">Average Annual Savings</div>
+                    <p style="margin-top: 1rem; color: #666; font-size: 0.9rem;">Based on a 15-device practice switching to optimized maintenance contracts</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <h3>Ready to Optimize Your Practice?</h3>
+            <p>Get access to all our free resources plus personalized recommendations from our medical equipment experts</p>
+            
+            <div class="cta-buttons">
+                <a href="resources.html" class="cta-button primary">Access All Free Tools</a>
+                <a href="tel:4808407352" class="cta-button">Schedule Free Consultation</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all tool cards
+        document.querySelectorAll('.tool-card, .fade-in-up').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add hover effects to statistics
+        document.querySelectorAll('.stat-item').forEach(stat => {
+            stat.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.transition = 'transform 0.3s ease';
+            });
+            
+            stat.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

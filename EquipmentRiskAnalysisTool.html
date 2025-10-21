@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedAsset Partners - Equipment Risk Analysis Tool</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+      color: #333333; line-height: 1.6; min-height: 100vh;
+    }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+    .header {
+      background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+      color: white; padding: 30px; border-radius: 15px; text-align: center;
+      margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    .header h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 700; }
+    .header p { font-size: 1.1rem; opacity: 0.95; }
+
+    .scorecard { background: white; border-radius: 15px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+    .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 10px; }
+
+    label { font-weight: 600; color: #333333; margin-bottom: 6px; display: block; }
+    input, select { width: 100%; padding: 10px; border: 2px solid #e9ecef; border-radius: 5px; font-size: 14px; }
+    input:focus, select:focus { outline: none; border-color: #2E86AB; }
+
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    thead th { text-align: left; padding: 10px; background: #f8f9fa; color: #666666; font-weight: 600; }
+    tbody td { padding: 15px; border-bottom: 1px solid #eeeeee; vertical-align: middle; }
+    tbody tr:hover { background: #f8f9fa; }
+
+    .stack-sm { display: flex; flex-direction: column; gap: 6px; }
+
+    .score-bar { height: 10px; background: #e9ecef; border-radius: 999px; overflow: hidden; }
+    .score-bar span { display: block; height: 100%; background: linear-gradient(135deg, #2E86AB 0%, #A23B72 60%, #F18F01 100%); }
+
+    .badge { display: inline-block; padding: 6px 12px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; text-align: center; }
+    .low { background: #e8f5e9; color: #1b5e20; }
+    .moderate { background: #fffde7; color: #b36b00; }
+    .high { background: #fff3e0; color: #bf360c; }
+    .critical { background: #ffebee; color: #b71c1c; }
+
+    .btn { background: linear-gradient(135deg, #F18F01 0%, #F39C12 100%); color: white; padding: 12px 20px; border: none; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: transform 0.3s; margin: 5px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(241, 143, 1, 0.3); }
+
+    .btn-row { padding: 6px 10px; border-radius: 8px; border: 1px solid #e9ecef; background: #f8f9fa; cursor: pointer; font-weight: 600; }
+    .btn-row:hover { background: #eef2f7; }
+
+    @media print { body { background: white !important; } .btn { display: none; } .header { background: #2E86AB !important; -webkit-print-color-adjust: exact; } .score-bar span { background: #2E86AB !important; -webkit-print-color-adjust: exact; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Equipment Risk Analysis Tool</h1>
+      <p>Prioritize maintenance investments based on Age, Criticality, and Maintenance History</p>
+    </div>
+
+    <div class="scorecard">
+      <div class="form-grid">
+        <div>
+          <label for="name">Equipment Name</label>
+          <input id="name" placeholder="e.g., Autoclave A-12" />
+        </div>
+        <div>
+          <label for="category">Category</label>
+          <input id="category" placeholder="e.g., Sterilizer" />
+        </div>
+        <div>
+          <label for="age">Age (years)</label>
+          <input id="age" type="number" min="0" step="0.1" placeholder="e.g., 6" />
+        </div>
+        <div>
+          <label for="criticality">Criticality</label>
+          <select id="criticality">
+            <option value="1">Low (1)</option>
+            <option value="2">Medium (2)</option>
+            <option value="3">High (3)</option>
+            <option value="4">Very High (4)</option>
+            <option value="5">Patient-Critical (5)</option>
+          </select>
+        </div>
+        <div>
+          <label for="pm">PM Compliance (%)</label>
+          <input id="pm" type="number" min="0" max="100" step="1" placeholder="e.g., 85" />
+        </div>
+        <div>
+          <label for="failures">Failures (past 12 mo)</label>
+          <input id="failures" type="number" min="0" step="1" placeholder="e.g., 2" />
+        </div>
+        <div>
+          <label for="downtime">Avg Downtime / Failure (hrs)</label>
+          <input id="downtime" type="number" min="0" step="0.1" placeholder="e.g., 6" />
+        </div>
+        <div style="display:flex; align-items:end; gap:8px;">
+          <button class="btn" id="add">Add Equipment</button>
+          <button class="btn" id="clear-form" type="button">Clear</button>
+        </div>
+      </div>
+
+      <table aria-label="Equipment risk table">
+        <thead>
+          <tr>
+            <th>Equipment</th>
+            <th>Age</th>
+            <th>Criticality</th>
+            <th>Maintenance Inputs</th>
+            <th>Risk Score</th>
+            <th>Tier</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+
+      <div style="text-align: center; margin-top: 20px;">
+        <button class="btn" id="export-csv" type="button">Export CSV</button>
+        <button class="btn" id="print" type="button">Print / PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function(){
+      const nameEl = document.getElementById('name');
+      const categoryEl = document.getElementById('category');
+      const ageEl = document.getElementById('age');
+      const critEl = document.getElementById('criticality');
+      const pmEl = document.getElementById('pm');
+      const failuresEl = document.getElementById('failures');
+      const downtimeEl = document.getElementById('downtime');
+      const addBtn = document.getElementById('add');
+      const clearBtn = document.getElementById('clear-form');
+      const exportBtn = document.getElementById('export-csv');
+      const printBtn = document.getElementById('print');
+      const tbody = document.getElementById('rows');
+
+      /** Simple in-memory store */
+      let items = [];
+
+      function ageToScore(age){
+        if (age <= 1) return 1;
+        if (age <= 3) return 2;
+        if (age <= 6) return 3;
+        if (age <= 10) return 4;
+        return 5;
+      }
+      function pmToScore(pm){
+        if (pm >= 95) return 1;
+        if (pm >= 80) return 2;
+        if (pm >= 65) return 3;
+        if (pm >= 50) return 4;
+        return 5;
+      }
+      function failuresToScore(f){
+        if (f >= 5) return 5;
+        if (f >= 3) return 4;
+        if (f === 2) return 3;
+        if (f === 1) return 2;
+        return 1; // 0 failures
+      }
+      function downtimeToScore(h){
+        if (h >= 24) return 5;
+        if (h >= 12) return 4;
+        if (h >= 6) return 3;
+        if (h >= 2) return 2;
+        return 1;
+      }
+
+      function computeRisk({age, criticality, pm, failures, downtime}){
+        const sAge = ageToScore(age);
+        const sPM = pmToScore(pm);
+        const sFail = failuresToScore(failures);
+        const sDown = downtimeToScore(downtime);
+        const sCrit = criticality; // already 1-5
+        // weights: Crit .30, Fail .25, Age .20, PM .15, Down .10
+        const score = (sCrit*0.30) + (sFail*0.25) + (sAge*0.20) + (sPM*0.15) + (sDown*0.10);
+        let tier = 'low';
+        if (score > 4) tier = 'critical';
+        else if (score > 3) tier = 'high';
+        else if (score > 2) tier = 'moderate';
+        return { score, tier };
+      }
+
+      function render(){
+        tbody.innerHTML = '';
+        items.forEach((it, idx) => {
+          const tr = document.createElement('tr');
+          const scorePct = Math.min(100, Math.max(0, (it.score/5)*100));
+
+          tr.innerHTML = `
+            <td>
+              <div class="stack-sm">
+                <strong>${escapeHtml(it.name || '—')}</strong>
+                <span style="color:#666;">${escapeHtml(it.category || '')}</span>
+              </div>
+            </td>
+            <td>${it.age.toFixed(1)} yr</td>
+            <td>${it.criticality} / 5</td>
+            <td>
+              <div class="stack-sm">
+                <span>PM: ${it.pm}%</span>
+                <span>Failures: ${it.failures}</span>
+                <span>Downtime: ${it.downtime} hrs</span>
+              </div>
+            </td>
+            <td>
+              <div class="stack-sm">
+                <div class="score-bar" aria-hidden="true"><span style="width:${scorePct}%"></span></div>
+                <div><strong>${it.score.toFixed(1)}</strong> / 5</div>
+              </div>
+            </td>
+            <td><span class="badge ${it.tier}">${it.tier.charAt(0).toUpperCase()+it.tier.slice(1)}</span></td>
+            <td>
+              <button class="btn-row" data-action="delete" data-index="${idx}">Delete</button>
+            </td>
+          `;
+          tbody.appendChild(tr);
+        });
+      }
+
+      function addItem(){
+        const name = nameEl.value.trim();
+        const category = categoryEl.value.trim();
+        const age = parseFloat(ageEl.value);
+        const criticality = parseInt(critEl.value, 10);
+        const pm = parseFloat(pmEl.value);
+        const failures = parseInt(failuresEl.value || '0', 10);
+        const downtime = parseFloat(downtimeEl.value || '0');
+
+        if (!name || Number.isNaN(age) || Number.isNaN(criticality) || Number.isNaN(pm)){
+          alert('Please enter at least Name, Age, Criticality, and PM Compliance.');
+          return;
+        }
+
+        const { score, tier } = computeRisk({ age, criticality, pm, failures, downtime });
+        items.push({ name, category, age, criticality, pm, failures, downtime, score, tier });
+        render();
+        clearForm();
+      }
+
+      function clearForm(){
+        nameEl.value=''; categoryEl.value=''; ageEl.value=''; critEl.value='1'; pmEl.value=''; failuresEl.value=''; downtimeEl.value='';
+      }
+
+      function onTableClick(e){
+        const btn = e.target.closest('button[data-action]');
+        if (!btn) return;
+        const action = btn.dataset.action;
+        const index = parseInt(btn.dataset.index, 10);
+        if (action === 'delete' && !Number.isNaN(index)){
+          items.splice(index, 1);
+          render();
+        }
+      }
+
+      function exportCSV(){
+        if (!items.length){ alert('No rows to export.'); return; }
+        const header = ['Equipment','Category','Age (yr)','Criticality (1-5)','PM (%)','Failures (12 mo)','Avg Downtime (hr)','Risk Score (1-5)','Tier'];
+        const lines = [header.join(',')];
+        items.forEach(it => {
+          lines.push([
+            safeCsv(it.name), safeCsv(it.category), it.age, it.criticality, it.pm, it.failures, it.downtime, it.score.toFixed(2), it.tier
+          ].join(','));
+        });
+        const blob = new Blob([lines.join('\n')], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url; a.download = 'equipment_risk_export.csv';
+        document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+      }
+
+      function escapeHtml(str){
+        return String(str).replace(/[&<>"']/g, s => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;'}[s]));
+      }
+      function safeCsv(str){
+        const s = String(str ?? '');
+        if (s.includes(',') || s.includes('"') || s.includes('\n')){
+          return '"' + s.replace(/"/g, '""') + '"';
+        }
+        return s;
+      }
+
+      // Wire up events
+      addBtn.addEventListener('click', addItem);
+      clearBtn.addEventListener('click', clearForm);
+      tbody.addEventListener('click', onTableClick);
+      exportBtn.addEventListener('click', exportCSV);
+      printBtn.addEventListener('click', () => window.print());
+    })();
+  </script>
+</body>
+</html>

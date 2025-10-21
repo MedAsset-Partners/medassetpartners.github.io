@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipment Automation ROI Calculator - MedAsset Partners</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(46, 134, 171, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        /* Main Layout */
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .input-section, .results-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .input-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #2E86AB, #F18F01);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .results-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #27AE60, #2ECC71);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        
+        /* Form Styling */
+        .input-group {
+            margin-bottom: 25px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2E86AB;
+            font-size: 0.95rem;
+        }
+        
+        .input-wrapper {
+            position: relative;
+        }
+        
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+        
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #2E86AB;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+        }
+        
+        .currency-input {
+            padding-left: 35px !important;
+        }
+        
+        .currency-symbol {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-weight: bold;
+        }
+        
+        .help-text {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        /* Results Styling */
+        .results-grid {
+            display: grid;
+            gap: 20px;
+        }
+        
+        .result-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .result-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        .result-label {
+            color: #666;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .savings-card .result-value {
+            color: #27AE60;
+        }
+        
+        .roi-card .result-value {
+            color: #2E86AB;
+        }
+        
+        .payback-card .result-value {
+            color: #F18F01;
+        }
+        
+        /* Benefits Section */
+        .benefits-section {
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            position: relative;
+        }
+        
+        .benefits-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #A23B72, #F18F01);
+            border-radius: 20px 20px 0 0;
+        }
+        
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .benefit-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid;
+        }
+        
+        .benefit-card:nth-child(1) { border-left-color: #27AE60; }
+        .benefit-card:nth-child(2) { border-left-color: #E74C3C; }
+        .benefit-card:nth-child(3) { border-left-color: #F39C12; }
+        .benefit-card:nth-child(4) { border-left-color: #8E44AD; }
+        
+        .benefit-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .benefit-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .benefit-desc {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            margin-top: 30px;
+            padding: 40px;
+            background: linear-gradient(135deg, #2E86AB 0%, #A23B72 50%, #F18F01 100%);
+            border-radius: 20px;
+            color: white;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 40px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .calculator-layout {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1rem;
+            }
+            
+            .benefits-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+        }
+        
+        /* Animation Classes */
+        .animate-in {
+            animation: slideInUp 0.6s ease forwards;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        
+        @keyframes slideInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, #fff3cd, #ffeaa7);
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #F18F01;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1>Equipment Automation ROI Calculator</h1>
+                <p class="subtitle">Discover Your Potential Savings from Smart Medical Equipment Management</p>
+            </div>
+        </div>
+        
+        <div class="calculator-layout">
+            <div class="input-section">
+                <h2 class="section-title">Current Practice Information</h2>
+                
+                <div class="input-group">
+                    <label for="equipment-count">Number of Equipment Units</label>
+                    <input type="number" id="equipment-count" min="1" max="100" value="5" placeholder="5">
+                    <div class="help-text">Total medical devices requiring maintenance</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="maintenance-cost">Current Annual Maintenance Cost</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="maintenance-cost" class="currency-input" min="1000" max="500000" value="25000" placeholder="25,000">
+                    </div>
+                    <div class="help-text">Total yearly spending on equipment maintenance</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="downtime-hours">Monthly Downtime Hours</label>
+                    <input type="number" id="downtime-hours" min="0" max="200" value="8" placeholder="8">
+                    <div class="help-text">Hours per month equipment is non-functional</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="hourly-revenue">Average Hourly Revenue</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="hourly-revenue" class="currency-input" min="50" max="2000" value="300" placeholder="300">
+                    </div>
+                    <div class="help-text">Revenue generated per operational hour</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="staff-hours">Monthly Staff Hours on Equipment Management</label>
+                    <input type="number" id="staff-hours" min="1" max="200" value="20" placeholder="20">
+                    <div class="help-text">Time spent on manual monitoring and coordination</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="staff-rate">Staff Hourly Rate</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="staff-rate" class="currency-input" min="15" max="150" value="35" placeholder="35">
+                    </div>
+                    <div class="help-text">Fully loaded hourly cost for equipment management staff</div>
+                </div>
+                
+                <div class="input-group">
+                    <label for="automation-cost">Estimated Automation Implementation Cost</label>
+                    <div class="input-wrapper">
+                        <span class="currency-symbol">$</span>
+                        <input type="number" id="automation-cost" class="currency-input" min="5000" max="200000" value="15000" placeholder="15,000">
+                    </div>
+                    <div class="help-text">One-time cost for smart monitoring systems and integration</div>
+                </div>
+            </div>
+            
+            <div class="results-section">
+                <h2 class="section-title">Your ROI Analysis</h2>
+                
+                <div class="results-grid">
+                    <div class="result-card savings-card">
+                        <div class="result-value" id="annual-savings">$0</div>
+                        <div class="result-label">Annual Savings</div>
+                    </div>
+                    
+                    <div class="result-card roi-card">
+                        <div class="result-value" id="roi-percentage">0%</div>
+                        <div class="result-label">3-Year ROI</div>
+                    </div>
+                    
+                    <div class="result-card payback-card">
+                        <div class="result-value" id="payback-period">0.0</div>
+                        <div class="result-label">Payback Period (Months)</div>
+                    </div>
+                </div>
+                
+                <div class="highlight">
+                    <h3>Key Savings Breakdown:</h3>
+                    <div id="savings-breakdown">
+                        <p><strong>Maintenance Cost Reduction:</strong> $0/year</p>
+                        <p><strong>Downtime Prevention:</strong> $0/year</p>
+                        <p><strong>Staff Efficiency Gains:</strong> $0/year</p>
+                        <p><strong>Total Annual Savings:</strong> $0/year</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="benefits-section">
+            <h2 class="section-title">Automation Benefits Beyond Cost Savings</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">📊</div>
+                    <div class="benefit-title">Real-Time Monitoring</div>
+                    <div class="benefit-desc">24/7 equipment health tracking with predictive maintenance alerts to prevent costly breakdowns</div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔧</div>
+                    <div class="benefit-title">Proactive Maintenance</div>
+                    <div class="benefit-desc">Schedule maintenance based on actual usage patterns, not arbitrary timelines</div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <div class="benefit-title">Mobile Alerts</div>
+                    <div class="benefit-desc">Instant notifications for equipment issues, maintenance needs, and performance metrics</div>
+                </div>
+                
+                <div class="benefit-card">
+                    <div class="benefit-icon">📋</div>
+                    <div class="benefit-title">Compliance Automation</div>
+                    <div class="benefit-desc">Automated documentation and reporting for regulatory compliance requirements</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Ready to Implement Equipment Automation?</h2>
+            <p style="margin-bottom: 25px;">Our experts can help you realize these savings and more with customized automation solutions.</p>
+            <a href="tel:4808407352" class="cta-button">Schedule Free Consultation</a>
+        </div>
+    </div>
+    
+    <script>
+        // Calculate ROI based on user inputs
+        function calculateROI() {
+            // Get input values
+            const equipmentCount = parseInt(document.getElementById('equipment-count').value) || 0;
+            const maintenanceCost = parseInt(document.getElementById('maintenance-cost').value) || 0;
+            const downtimeHours = parseInt(document.getElementById('downtime-hours').value) || 0;
+            const hourlyRevenue = parseInt(document.getElementById('hourly-revenue').value) || 0;
+            const staffHours = parseInt(document.getElementById('staff-hours').value) || 0;
+            const staffRate = parseInt(document.getElementById('staff-rate').value) || 0;
+            const automationCost = parseInt(document.getElementById('automation-cost').value) || 0;
+            
+            // Calculate savings components
+            const maintenanceReduction = maintenanceCost * 0.35; // 35% average reduction
+            const downtimePrevenedRevenue = downtimeHours * hourlyRevenue * 12 * 0.7; // 70% downtime prevention
+            const staffEfficiencyGains = staffHours * staffRate * 12 * 0.6; // 60% efficiency improvement
+            
+            // Total annual savings
+            const totalAnnualSavings = maintenanceReduction + downtimePrevenedRevenue + staffEfficiencyGains;
+            
+            // 3-year calculations
+            const threeYearSavings = totalAnnualSavings * 3;
+            const roi = ((threeYearSavings - automationCost) / automationCost) * 100;
+            
+            // Payback period in months
+            const paybackPeriod = automationCost / (totalAnnualSavings / 12);
+            
+            // Update display
+            document.getElementById('annual-savings').textContent = '$' + totalAnnualSavings.toLocaleString();
+            document.getElementById('roi-percentage').textContent = Math.round(roi) + '%';
+            document.getElementById('payback-period').textContent = Math.max(paybackPeriod, 0.1).toFixed(1);
+            
+            // Update breakdown
+            const breakdown = document.getElementById('savings-breakdown');
+            breakdown.innerHTML = `
+                <p><strong>Maintenance Cost Reduction:</strong> $${maintenanceReduction.toLocaleString()}/year</p>
+                <p><strong>Downtime Prevention:</strong> $${downtimePrevenedRevenue.toLocaleString()}/year</p>
+                <p><strong>Staff Efficiency Gains:</strong> $${staffEfficiencyGains.toLocaleString()}/year</p>
+                <p style="color: #27AE60; font-size: 1.1em;"><strong>Total Annual Savings:</strong> $${totalAnnualSavings.toLocaleString()}/year</p>
+            `;
+            
+            // Animate results
+            document.querySelectorAll('.result-card').forEach((card, index) => {
+                card.classList.remove('animate-in');
+                setTimeout(() => {
+                    card.classList.add('animate-in');
+                }, index * 100);
+            });
+        }
+        
+        // Add event listeners to all inputs
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('input', calculateROI);
+        });
+        
+        // Initial calculation
+        calculateROI();
+        
+        // Format number inputs with commas
+        document.querySelectorAll('input[type="number"]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value) {
+                    this.value = parseInt(this.value.replace(/,/g, ''));
+                }
+            });
+        });
+        
+        // Smooth animations on load
+        setTimeout(() => {
+            document.querySelectorAll('.input-section, .results-section').forEach(section => {
+                section.classList.add('animate-in');
+            });
+        }, 200);
+    </script>
+</body>
+</html>

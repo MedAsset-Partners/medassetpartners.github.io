@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedAsset Partners - Budget Planning Worksheet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #dce7ec 0%, #dce8f0 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 3s ease-in-out infinite;
+        }
+        
+        .logo-mini {
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mini-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .mini-cross {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .mini-cross::before,
+        .mini-cross::after {
+            content: '';
+            position: absolute;
+            background: white;
+            border-radius: 1px;
+        }
+        
+        .mini-cross::before {
+            width: 3px;
+            height: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .mini-cross::after {
+            width: 20px;
+            height: 3px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        /* Main Content */
+        .worksheet-container {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .section {
+            margin-bottom: 40px;
+            padding: 25px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f2ff 100%);
+            border-left: 4px solid #2E86AB;
+        }
+        
+        .section h2 {
+            color: #2E86AB;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(45deg, #2E86AB, #3498db);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .input-group {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 15px;
+            align-items: center;
+        }
+        
+        .input-group label {
+            font-weight: 500;
+            color: #555;
+        }
+        
+        .input-group input,
+        .input-group select {
+            padding: 10px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .input-group input:focus,
+        .input-group select:focus {
+            outline: none;
+            border-color: #2E86AB;
+            box-shadow: 0 0 0 3px rgba(46, 134, 171, 0.1);
+        }
+        
+        .currency-input {
+            position: relative;
+        }
+        
+        .currency-input::before {
+            content: '$';
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-weight: 500;
+        }
+        
+        .currency-input input {
+            padding-left: 25px;
+        }
+        
+        .add-item-btn {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+            margin-top: 10px;
+        }
+        
+        .add-item-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .remove-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: transform 0.2s ease;
+        }
+        
+        .remove-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .summary-section {
+            background: linear-gradient(135deg, #2E86AB 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 30px;
+        }
+        
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .summary-item {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .summary-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .summary-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+        
+        .savings-highlight {
+            background: linear-gradient(45deg, #4CAF50, #66BB6A);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .savings-amount {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .contact-cta {
+            background: white;
+            color: #2E86AB;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .contact-cta h3 {
+            margin-bottom: 15px;
+            color: #2E86AB;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #ff8e8e);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-2px);
+        }
+        
+        .print-btn {
+            background: linear-gradient(45deg, #9C27B0, #BA68C8);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            margin: 10px;
+        }
+        
+        .print-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        
+        @media (max-width: 768px) {
+            .input-group {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .summary-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .worksheet-container {
+                padding: 20px;
+            }
+        }
+        
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .header, .contact-cta {
+                background: #2E86AB !important;
+                color: white !important;
+            }
+            
+            .print-btn, .add-item-btn, .remove-btn {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-mini">
+                    <div class="mini-icon">
+                        <div class="mini-cross"></div>
+                    </div>
+                    <div>
+                        <div style="font-size: 18px; font-weight: 700; margin-bottom: 2px;">MedAsset Partners</div>
+                        <div style="font-size: 12px; opacity: 0.8;">Medical Equipment Excellence</div>
+                    </div>
+                </div>
+                <h1>Budget Planning Worksheet</h1>
+                <p>Plan your medical equipment maintenance and technology costs</p>
+            </div>
+        </header>
+
+        <div class="worksheet-container">
+            <!-- Current Equipment Costs -->
+            <div class="section">
+                <h2><span class="section-icon">🏥</span>Current Equipment Maintenance Costs</h2>
+                <div id="equipment-costs">
+                    <div class="input-group">
+                        <label><strong>Equipment/Service</strong></label>
+                        <label><strong>Current Annual Cost</strong></label>
+                        <label><strong>Action</strong></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" placeholder="e.g., Laser Equipment Maintenance" class="equipment-name">
+                        <div class="currency-input">
+                            <input type="number" placeholder="0" class="equipment-cost" oninput="calculateTotals()">
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(this)" style="visibility: hidden;">Remove</button>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="addEquipmentItem()">+ Add Equipment</button>
+            </div>
+
+            <!-- Technology Costs -->
+            <div class="section">
+                <h2><span class="section-icon">💻</span>Technology & Software Costs</h2>
+                <div id="technology-costs">
+                    <div class="input-group">
+                        <label><strong>Technology/Software</strong></label>
+                        <label><strong>Current Annual Cost</strong></label>
+                        <label><strong>Action</strong></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" placeholder="e.g., Practice Management Software" class="tech-name">
+                        <div class="currency-input">
+                            <input type="number" placeholder="0" class="tech-cost" oninput="calculateTotals()">
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(this)" style="visibility: hidden;">Remove</button>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="addTechnologyItem()">+ Add Technology</button>
+            </div>
+
+            <!-- Emergency & Downtime Costs -->
+            <div class="section">
+                <h2><span class="section-icon">⚡</span>Emergency & Downtime Costs</h2>
+                <div class="input-group">
+                    <label>Estimated emergency repair costs per year:</label>
+                    <div class="currency-input">
+                        <input type="number" id="emergency-cost" placeholder="0" oninput="calculateTotals()">
+                    </div>
+                    <span></span>
+                </div>
+                <div class="input-group">
+                    <label>Estimated revenue lost due to equipment downtime:</label>
+                    <div class="currency-input">
+                        <input type="number" id="downtime-cost" placeholder="0" oninput="calculateTotals()">
+                    </div>
+                    <span></span>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="section">
+                <h2><span class="section-icon">🔧</span>Additional Services Needed</h2>
+                <div id="additional-services">
+                    <div class="input-group">
+                        <label><strong>Service</strong></label>
+                        <label><strong>Estimated Annual Cost</strong></label>
+                        <label><strong>Action</strong></label>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" placeholder="e.g., Staff Training, Compliance Audits" class="service-name">
+                        <div class="currency-input">
+                            <input type="number" placeholder="0" class="service-cost" oninput="calculateTotals()">
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(this)" style="visibility: hidden;">Remove</button>
+                    </div>
+                </div>
+                <button class="add-item-btn" onclick="addServiceItem()">+ Add Service</button>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="summary-section">
+            <h2 style="text-align: center; margin-bottom: 30px; color: white;">Budget Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-amount" id="total-current">$0</div>
+                    <div class="summary-label">Total Current Costs</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-amount" id="potential-savings">$0</div>
+                    <div class="summary-label">Potential Savings (40%)</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-amount" id="projected-cost">$0</div>
+                    <div class="summary-label">Projected Cost with MedAsset</div>
+                </div>
+            </div>
+            
+            <div class="savings-highlight">
+                <div class="savings-amount" id="annual-savings">$0</div>
+                <div>Estimated Annual Savings</div>
+            </div>
+        </div>
+
+        <!-- Call to Action -->
+        <div class="contact-cta">
+            <h3>Ready to Start Saving? Get Your Free Quote Today!</h3>
+            <p style="margin-bottom: 20px;">Our experts will review your budget and provide a customized management plan that could save you thousands.</p>
+            <a href="tel:4808407352" class="cta-button">Call (480) 840-7352</a>
+            <a href="mailto:info@medassetpartners.com" class="cta-button">Email Us</a>
+            <button class="print-btn" onclick="window.print()">Print Worksheet</button>
+        </div>
+    </div>
+
+    <script>
+        function calculateTotals() {
+            let equipmentTotal = 0;
+            let techTotal = 0;
+            let serviceTotal = 0;
+            
+            // Calculate equipment costs
+            document.querySelectorAll('.equipment-cost').forEach(input => {
+                equipmentTotal += parseFloat(input.value) || 0;
+            });
+            
+            // Calculate technology costs
+            document.querySelectorAll('.tech-cost').forEach(input => {
+                techTotal += parseFloat(input.value) || 0;
+            });
+            
+            // Calculate service costs
+            document.querySelectorAll('.service-cost').forEach(input => {
+                serviceTotal += parseFloat(input.value) || 0;
+            });
+            
+            // Add emergency and downtime costs
+            const emergencyCost = parseFloat(document.getElementById('emergency-cost').value) || 0;
+            const downtimeCost = parseFloat(document.getElementById('downtime-cost').value) || 0;
+            
+            const totalCurrent = equipmentTotal + techTotal + serviceTotal + emergencyCost + downtimeCost;
+            const potentialSavings = totalCurrent * 0.4; // 40% savings
+            const projectedCost = totalCurrent - potentialSavings;
+            
+            // Update display
+            document.getElementById('total-current').textContent = '$' + totalCurrent.toLocaleString();
+            document.getElementById('potential-savings').textContent = '$' + potentialSavings.toLocaleString();
+            document.getElementById('projected-cost').textContent = '$' + projectedCost.toLocaleString();
+            document.getElementById('annual-savings').textContent = '$' + potentialSavings.toLocaleString();
+        }
+        
+        function addEquipmentItem() {
+            const container = document.getElementById('equipment-costs');
+            const newItem = document.createElement('div');
+            newItem.className = 'input-group';
+            newItem.innerHTML = `
+                <input type="text" placeholder="e.g., Equipment Name" class="equipment-name">
+                <div class="currency-input">
+                    <input type="number" placeholder="0" class="equipment-cost" oninput="calculateTotals()">
+                </div>
+                <button class="remove-btn" onclick="removeItem(this)">Remove</button>
+            `;
+            container.appendChild(newItem);
+        }
+        
+        function addTechnologyItem() {
+            const container = document.getElementById('technology-costs');
+            const newItem = document.createElement('div');
+            newItem.className = 'input-group';
+            newItem.innerHTML = `
+                <input type="text" placeholder="e.g., Software Name" class="tech-name">
+                <div class="currency-input">
+                    <input type="number" placeholder="0" class="tech-cost" oninput="calculateTotals()">
+                </div>
+                <button class="remove-btn" onclick="removeItem(this)">Remove</button>
+            `;
+            container.appendChild(newItem);
+        }
+        
+        function addServiceItem() {
+            const container = document.getElementById('additional-services');
+            const newItem = document.createElement('div');
+            newItem.className = 'input-group';
+            newItem.innerHTML = `
+                <input type="text" placeholder="e.g., Service Name" class="service-name">
+                <div class="currency-input">
+                    <input type="number" placeholder="0" class="service-cost" oninput="calculateTotals()">
+                </div>
+                <button class="remove-btn" onclick="removeItem(this)">Remove</button>
+            `;
+            container.appendChild(newItem);
+        }
+        
+        function removeItem(button) {
+            button.parentElement.remove();
+            calculateTotals();
+        }
+        
+        // Initialize calculations
+        calculateTotals();
+        
+        // Add some sample data for demonstration
+        document.addEventListener('DOMContentLoaded', function() {
+            // You can pre-fill some common equipment types here
+            setTimeout(() => {
+                const equipmentInputs = document.querySelectorAll('.equipment-name');
+                const equipmentCosts = document.querySelectorAll('.equipment-cost');
+                
+                if (equipmentInputs.length > 0) {
+                    equipmentInputs[0].value = 'Laser Equipment Maintenance';
+                    equipmentCosts[0].value = '12000';
+                }
+                
+                const techInputs = document.querySelectorAll('.tech-name');
+                const techCosts = document.querySelectorAll('.tech-cost');
+                
+                if (techInputs.length > 0) {
+                    techInputs[0].value = 'Practice Management Software';
+                    techCosts[0].value = '8000';
+                }
+                
+                calculateTotals();
+            }, 500);
+        });
+    </script>
+</body>
+</html>

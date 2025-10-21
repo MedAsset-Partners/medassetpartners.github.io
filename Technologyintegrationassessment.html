@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technology Integration Assessment | MedAsset Partners</title>
+  <style>
+    :root{
+      --brand-blue:#2E86AB;
+      --brand-blue-2:#3498db;
+      --brand-purple:#A23B72;
+      --brand-orange:#F18F01;
+      --success:#27AE60;
+      --text-dark:#333333;
+      --text-med:#666666;
+      --bg:#f8f9fa;
+      --bg-2:#e9ecef;
+      --card:#ffffff;
+      --border:#eeeeee;
+      --page-grad-1:#f5f7fa;
+      --page-grad-2:#c3cfe2;
+    }
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      color:var(--text-dark);
+      background: linear-gradient(135deg,var(--page-grad-1),var(--page-grad-2));
+      line-height:1.5;
+    }
+    .container{max-width:1100px;margin:0 auto;padding:24px}
+
+    /* Header / Hero */
+    .hero{
+      background: linear-gradient(135deg,var(--brand-blue),var(--brand-blue-2));
+      color:#fff;
+      padding:56px 0 40px;
+      position:relative;
+      overflow:hidden;
+    }
+    .hero::before{
+      content:"";position:absolute;inset:0;opacity:.25;
+      background:url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><g fill="none" stroke="white" stroke-width="1" opacity="0.4"><path d="M0 100 H200"/><path d="M100 0 V200"/></g></svg>');
+      background-size:200px 200px;
+    }
+    .hero h1{font-size:2.2rem;margin-bottom:8px}
+    .hero p{opacity:.95}
+
+    /* Card */
+    .card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;box-shadow:0 10px 30px rgba(0,0,0,.06)}
+    .card+.card{margin-top:16px}
+    .section-title{font-size:1.4rem;margin-bottom:10px}
+    .grid{display:grid;gap:16px}
+    .grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+    @media (max-width: 860px){.grid-2{grid-template-columns:1fr}}
+
+    /* Inputs */
+    fieldset{border:none;margin:0;padding:0}
+    legend{font-weight:700;margin-bottom:8px}
+    .question{padding:12px;border:1px dashed var(--border);border-radius:12px;background:#fff}
+    .question + .question{margin-top:10px}
+    label{display:block;margin:6px 0;color:var(--text-med)}
+    select, input[type="text"], input[type="number"], textarea{width:100%;padding:10px;border:1px solid var(--border);border-radius:10px;background:#fff}
+
+    /* Banner */
+    .banner{
+      background:linear-gradient(90deg,var(--brand-blue),var(--brand-purple),var(--brand-orange));
+      color:#fff;border-radius:14px;padding:14px 18px;margin:18px 0;font-weight:600;
+    }
+
+    /* Buttons */
+    .btn{display:inline-block;border:none;border-radius:999px;padding:12px 20px;font-weight:700;cursor:pointer}
+    .btn-primary{background:linear-gradient(45deg,#ff6b6b,#ff8e8e);color:#fff;box-shadow:0 8px 20px rgba(255,107,107,.35)}
+    .btn-secondary{background:linear-gradient(45deg,var(--brand-orange),#f5b041);color:#fff;box-shadow:0 8px 20px rgba(241,143,1,.35)}
+    .btn-ghost{background:#fff;color:var(--brand-blue);border:1px solid var(--brand-blue)}
+
+    /* Score */
+    .score-wrap{display:flex;align-items:center;gap:16px;margin-top:8px}
+    .score-circle{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;font-weight:800;border:4px solid var(--brand-blue)}
+    .badge{display:inline-block;padding:6px 10px;border-radius:999px;font-size:.85rem;font-weight:700}
+    .badge.good{background:rgba(39,174,96,.12);color:#1e8449;border:1px solid rgba(39,174,96,.4)}
+    .badge.warn{background:rgba(243,156,18,.12);color:#af6b00;border:1px solid rgba(243,156,18,.35)}
+    .badge.poor{background:rgba(231,76,60,.12);color:#a93226;border:1px solid rgba(231,76,60,.35)}
+    .badge.excellent{background:rgba(46,134,171,.12);color:#1b4f72;border:1px solid rgba(46,134,171,.35)}
+
+    /* Tables */
+    table{width:100%;border-collapse:collapse}
+    th, td{padding:10px;border-bottom:1px solid var(--border);text-align:left}
+    th{background:var(--bg)}
+
+    /* Footer CTA */
+    .cta{background:#333;color:#fff;border-radius:18px;padding:18px}
+    .cta a{color:#fff;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.6)}
+
+    /* Print */
+    @media print{
+      .no-print{display:none !important}
+      body{background:#fff}
+      .card{box-shadow:none}
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <h1>Technology Integration Assessment</h1>
+      <p>Evaluate equipment ↔ EMR interoperability and uncover automation opportunities to boost workflow efficiency.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="banner">Complete the sections below. Your Integration Score and a personalized recommendations report will generate automatically.</div>
+
+    <!-- Facility & EMR Context -->
+    <section class="card">
+      <h2 class="section-title">1) Facility & EMR Context</h2>
+      <div class="grid grid-2">
+        <div class="question">
+          <label>Facility / Department</label>
+          <input type="text" id="facility" placeholder="e.g., Med Spa West — Aesthetics" />
+        </div>
+        <div class="question">
+          <label>Primary EMR/EHR</label>
+          <input type="text" id="emr" placeholder="e.g., Athenahealth, eClinicalWorks, Epic — version" />
+        </div>
+        <div class="question">
+          <label>Integration Engine / Middleware (if any)</label>
+          <input type="text" id="middleware" placeholder="e.g., Mirth, Redox, Corepoint, Rhapsody, None" />
+        </div>
+        <div class="question">
+          <label>Number of connected devices</label>
+          <input type="number" id="deviceCount" min="0" placeholder="e.g., 15" />
+        </div>
+      </div>
+    </section>
+
+    <!-- Connectivity & Standards -->
+    <section class="card">
+      <h2 class="section-title">2) Connectivity & Standards (20 pts)</h2>
+      <fieldset class="grid grid-2">
+        <div class="question">
+          <legend>Physical connectivity</legend>
+          <label><input type="radio" name="physical" value="20"> Networked (LAN/Wi‑Fi), stable</label>
+          <label><input type="radio" name="physical" value="12"> Mixed (USB/serial + some network)</label>
+          <label><input type="radio" name="physical" value="6"> Standalone / sneaker‑net</label>
+          <label><input type="radio" name="physical" value="0"> Unknown</label>
+        </div>
+        <div class="question">
+          <legend>Standards supported</legend>
+          <label><input type="radio" name="standards" value="20"> HL7 v2 / FHIR / DICOM as applicable</label>
+          <label><input type="radio" name="standards" value="12"> CSV/XML exports + partial HL7</label>
+          <label><input type="radio" name="standards" value="6"> Proprietary only</label>
+          <label><input type="radio" name="standards" value="0"> Unknown</label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Orders & Results -->
+    <section class="card">
+      <h2 class="section-title">3) Orders & Results Workflow (20 pts)</h2>
+      <fieldset class="grid grid-2">
+        <div class="question">
+          <legend>Order entry</legend>
+          <label><input type="radio" name="orders" value="20"> Electronic orders from EMR (no manual re‑entry)</label>
+          <label><input type="radio" name="orders" value="12"> Mixed electronic + manual</label>
+          <label><input type="radio" name="orders" value="6"> Manual / paper requisitions</label>
+          <label><input type="radio" name="orders" value="0"> Not applicable</label>
+        </div>
+        <div class="question">
+          <legend>Results posting</legend>
+          <label><input type="radio" name="results" value="20"> Auto‑post structured results to EMR</label>
+          <label><input type="radio" name="results" value="12"> PDF/image pushed; limited discretes</label>
+          <label><input type="radio" name="results" value="6"> Manual scan/upload</label>
+          <label><input type="radio" name="results" value="0"> Not applicable</label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Identity & Security -->
+    <section class="card">
+      <h2 class="section-title">4) Identity, Security & Compliance (20 pts)</h2>
+      <fieldset class="grid grid-2">
+        <div class="question">
+          <legend>User access</legend>
+          <label><input type="radio" name="access" value="10"> SSO/AD or EMR‑backed users</label>
+          <label><input type="radio" name="access" value="6"> Shared logins with audit trail</label>
+          <label><input type="radio" name="access" value="3"> Shared logins, limited audit</label>
+          <label><input type="radio" name="access" value="0"> Unknown</label>
+        </div>
+        <div class="question">
+          <legend>Security controls</legend>
+          <label><input type="radio" name="security" value="10"> Encrypted in transit, audit logs, role‑based access</label>
+          <label><input type="radio" name="security" value="6"> Encrypted transport only</label>
+          <label><input type="radio" name="security" value="3"> Minimal controls</label>
+          <label><input type="radio" name="security" value="0"> Unknown</label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Reliability & Vendor Support -->
+    <section class="card">
+      <h2 class="section-title">5) Reliability & Vendor Support (10 pts)</h2>
+      <fieldset class="grid grid-2">
+        <div class="question">
+          <legend>Uptime & monitoring</legend>
+          <label><input type="radio" name="uptime" value="5"> > 95% uptime + monitoring/alerts</label>
+          <label><input type="radio" name="uptime" value="3"> ~90–95% uptime</label>
+          <label><input type="radio" name="uptime" value="1"> < 90% or unknown</label>
+          <label><input type="radio" name="uptime" value="0"> Not monitored</label>
+        </div>
+        <div class="question">
+          <legend>APIs / integration help</legend>
+          <label><input type="radio" name="api" value="5"> Documented APIs & responsive vendor</label>
+          <label><input type="radio" name="api" value="3"> Limited APIs or slow vendor</label>
+          <label><input type="radio" name="api" value="1"> No API</label>
+          <label><input type="radio" name="api" value="0"> Unknown</label>
+        </div>
+      </fieldset>
+    </section>
+
+    <!-- Automation Readiness & Opportunities -->
+    <section class="card">
+      <h2 class="section-title">6) Automation Readiness & Opportunities (10 pts)</h2>
+      <div class="grid grid-2">
+        <div class="question">
+          <legend>Event triggers available</legend>
+          <label><input type="radio" name="triggers" value="10"> Webhooks / event feed available</label>
+          <label><input type="radio" name="triggers" value="6"> Pollable endpoints or file drops</label>
+          <label><input type="radio" name="triggers" value="3"> Manual exports only</label>
+          <label><input type="radio" name="triggers" value="0"> Unknown</label>
+        </div>
+        <div class="question">
+          <legend>Potential automations (check all that apply)</legend>
+          <label><input type="checkbox" class="auto" value="Order creation from EMR templates"> Order creation from EMR templates</label>
+          <label><input type="checkbox" class="auto" value="Auto‑post device results to patient chart"> Auto‑post device results to patient chart</label>
+          <label><input type="checkbox" class="auto" value="Barcode/QR patient + device match"> Barcode/QR patient + device match</label>
+          <label><input type="checkbox" class="auto" value="Automatic supply/consumable re‑orders"> Automatic supply/consumable re‑orders</label>
+          <label><input type="checkbox" class="auto" value="Auto‑create maintenance tickets from device alerts"> Auto‑create maintenance tickets from device alerts</label>
+          <label><input type="checkbox" class="auto" value="Schedule sync between EMR and device"> Schedule sync between EMR and device</label>
+        </div>
+      </div>
+    </section>
+
+    <!-- Score & Recommendations -->
+    <section class="card">
+      <h2 class="section-title">Integration Score & Recommendations</h2>
+      <div class="score-wrap">
+        <div class="score-circle" id="scoreCircle">—</div>
+        <div>
+          <div id="scoreBadge" class="badge">Not yet calculated</div>
+          <div id="scoreNote" style="margin-top:6px;color:var(--text-med)">Complete the questions above, then click <b>Calculate Score</b>.</div>
+        </div>
+      </div>
+      <div style="margin-top:16px" class="no-print">
+        <button class="btn btn-primary" id="calcBtn">Calculate Score</button>
+        <button class="btn btn-secondary" id="pdfBtn" title="Print or save as PDF">Download PDF</button>
+      </div>
+      <div id="recWrap" style="margin-top:18px;display:none">
+        <h3 style="margin-bottom:8px">Priority Recommendations</h3>
+        <div id="recBody"></div>
+      </div>
+    </section>
+
+    <!-- Equipment Table (Optional) -->
+    <section class="card">
+      <h2 class="section-title">Optional: Equipment Inventory Snapshot</h2>
+      <p class="" style="color:var(--text-med);margin-bottom:10px">Capture key devices impacting workflows.</p>
+      <table id="equipTable">
+        <thead>
+          <tr>
+            <th>Device</th>
+            <th>Model</th>
+            <th>Connection</th>
+            <th>Standard (HL7/FHIR/DICOM)</th>
+            <th>Result Type</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+      <div class="no-print" style="margin-top:10px;display:flex;gap:8px">
+        <button class="btn btn-ghost" id="addRow">Add Row</button>
+        <button class="btn btn-ghost" id="clearRows">Clear</button>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta card">
+      <h2 style="margin-bottom:6px">Want an expert integration roadmap?</h2>
+      <p>MedAsset Partners can validate interfaces, stand up integration engines, and build low‑code automations (Zapier, Make, Power Automate) tailored to your EMR and devices. 
+      <br/>Email <a href="mailto:info@medassetpartners.com">info@medassetpartners.com</a> or call <a href="tel:4808407352">(480) 840‑7352</a>.</p>
+    </section>
+
+  </main>
+
+  <script>
+    const inputs = {
+      physical: () => getVal('physical'),
+      standards: () => getVal('standards'),
+      orders: () => getVal('orders'),
+      results: () => getVal('results'),
+      access: () => getVal('access'),
+      security: () => getVal('security'),
+      uptime: () => getVal('uptime'),
+      api: () => getVal('api'),
+      triggers: () => getVal('triggers'),
+    };
+
+    function getVal(name){
+      const el = document.querySelector(`input[name="${name}"]:checked`);
+      return el ? Number(el.value) : 0;
+    }
+
+    function badgeFor(score){
+      if (score >= 80) return {text:'Excellent Integration', cls:'excellent'};
+      if (score >= 60) return {text:'Good Integration', cls:'good'};
+      if (score >= 40) return {text:'Partial Integration', cls:'warn'};
+      return {text:'Low Integration', cls:'poor'};
+    }
+
+    function buildRecs(score, values){
+      const gaps = [];
+      if (values.physical < 12) gaps.push('Network devices where possible; avoid manual USB/serial transfers.');
+      if (values.standards < 12) gaps.push('Enable HL7 v2/FHIR/DICOM interfaces or vendor gateways to standardize data.');
+      if (values.orders < 12) gaps.push('Move to electronic orders initiated from EMR to eliminate re‑entry.');
+      if (values.results < 12) gaps.push('Post discrete results back to the chart; avoid PDF‑only workflows.');
+      if (values.access < 6) gaps.push('Implement SSO/AD and unique user logins for traceability.');
+      if (values.security < 6) gaps.push('Ensure TLS in transit, audit logs, and role‑based access.');
+      if (values.uptime < 3) gaps.push('Add monitoring/alerts to keep uptime >95%.');
+      if (values.api < 3) gaps.push('Request/document vendor APIs or integration support.');
+      if (values.triggers < 6) gaps.push('Expose webhooks or file‑drop events to drive automations.');
+
+      const autos = Array.from(document.querySelectorAll('.auto:checked')).map(x=>x.value);
+
+      const html = `
+        <div class="card" style="border:1px solid var(--border);margin-top:10px">
+          <h4 style="margin-bottom:6px">Top Gaps</h4>
+          <ul style="padding-left:18px">${gaps.length ? gaps.map(g=>`<li>${g}</li>`).join('') : '<li>No major gaps detected. Focus on incremental wins.</li>'}</ul>
+        </div>
+        <div class="card" style="border:1px solid var(--border);margin-top:10px">
+          <h4 style="margin-bottom:6px">Automation Opportunities</h4>
+          <ul style="padding-left:18px">${autos.length ? autos.map(a=>`<li>${a}</li>`).join('') : '<li>Select potential automations above to populate.</li>'}</ul>
+        </div>
+        <div class="card" style="border:1px solid var(--border);margin-top:10px">
+          <h4 style="margin-bottom:6px">Next Steps</h4>
+          <ol style="padding-left:18px">
+            <li>Validate device interface capabilities with vendors; collect specs/API docs.</li>
+            <li>Stand up or configure an integration engine (e.g., Mirth) with test feeds.</li>
+            <li>Map orders/results and establish an EMR‑first workflow.</li>
+            <li>Pilot 1–2 automations (e.g., results auto‑posting, maintenance ticketing).</li>
+            <li>Roll out SSO and monitoring; track KPIs (re‑entry time, posting delay, error rate).</li>
+          </ol>
+        </div>`;
+      return html;
+    }
+
+    document.getElementById('calcBtn').addEventListener('click', ()=>{
+      const vals = Object.fromEntries(Object.entries(inputs).map(([k,f])=>[k,f()]));
+      const score = vals.physical + vals.standards + vals.orders + vals.results + vals.access + vals.security + vals.uptime + vals.api + vals.triggers; // /100
+      const badge = badgeFor(score);
+      const circle = document.getElementById('scoreCircle');
+      const badgeEl = document.getElementById('scoreBadge');
+      const note = document.getElementById('scoreNote');
+      circle.textContent = score;
+      badgeEl.textContent = badge.text;
+      badgeEl.className = `badge ${badge.cls}`;
+      note.textContent = `Score is out of 100. Higher is better.`;
+      const recWrap = document.getElementById('recWrap');
+      recWrap.style.display = 'block';
+      document.getElementById('recBody').innerHTML = buildRecs(score, vals);
+      window.scrollTo({top: recWrap.offsetTop - 80, behavior: 'smooth'});
+    });
+
+    document.getElementById('pdfBtn').addEventListener('click', ()=> window.print());
+
+    // Equipment table helpers
+    const tbody = document.querySelector('#equipTable tbody');
+    function row(){
+      const tr = document.createElement('tr');
+      ['Device','Model','Connection','Standard','Result'].forEach((ph)=>{
+        const td = document.createElement('td');
+        const input = document.createElement('input');
+        input.type = 'text';
+        input.placeholder = ph;
+        input.style.width='100%';
+        input.style.padding='8px';
+        input.style.border='1px solid var(--border)';
+        input.style.borderRadius='8px';
+        td.appendChild(input);
+        tr.appendChild(td);
+      });
+      return tr;
+    }
+    document.getElementById('addRow').addEventListener('click', ()=> tbody.appendChild(row()));
+    document.getElementById('clearRows').addEventListener('click', ()=> tbody.innerHTML='');
+
+    // Seed one row
+    tbody.appendChild(row());
+  </script>
+</body>
+</html>
