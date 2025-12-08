@@ -55,6 +55,22 @@
             justify-content: space-between;
             align-items: center;
         }
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: #fFFFFF;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #2E86AB;
+        }
 
         .logo {
             font-size: 24px;
@@ -411,7 +427,14 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">MedAsset Partners</div>
-                <a href="#contact" class="cta-button">Get Started</a>
+                
+
+                <nav>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="resources.html">Resources</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </header>
